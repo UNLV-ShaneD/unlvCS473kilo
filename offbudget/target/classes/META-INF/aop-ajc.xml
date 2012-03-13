@@ -1,16 +1,24 @@
 <aspectj>
 <aspects>
 <aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_JavaBean"/>
-<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Jpa_Entity"/>
 <aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_Configurable"/>
 <aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_Jpa_Entity"/>
 <aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_Jpa_ActiveRecord"/>
 <aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Serializable"/>
+<aspect name="edu.unlv.kilo.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
+<aspect name="edu.unlv.kilo.domain.MoneyValue_Roo_Jpa_Entity"/>
+<aspect name="edu.unlv.kilo.domain.MoneyValue_Roo_Serializable"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Configurable"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_ToString"/>
+<aspect name="edu.unlv.kilo.domain.MoneyValue_Roo_Jpa_ActiveRecord"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Jpa_Entity"/>
+<aspect name="edu.unlv.kilo.domain.MoneyValue_Roo_JavaBean"/>
 <aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_ToString"/>
 <aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_JavaBean"/>
 <aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Jpa_ActiveRecord"/>
-<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Configurable"/>
-<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_ToString"/>
+<aspect name="edu.unlv.kilo.domain.MoneyValue_Roo_ToString"/>
+<aspect name="edu.unlv.kilo.web.MainController_Roo_Controller"/>
+<aspect name="edu.unlv.kilo.domain.MoneyValue_Roo_Configurable"/>
 </aspects>
 </aspectj>
 

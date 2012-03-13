@@ -3,11 +3,11 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.TransactionDescription;
-import java.io.Serializable;
+import edu.unlv.kilo.domain.MoneyValue;
+import org.springframework.beans.factory.annotation.Configurable;
 
-privileged aspect TransactionDescription_Roo_Serializable {
+privileged aspect MoneyValue_Roo_Configurable {
     
-    declare parents: TransactionDescription implements Serializable;
+    declare @type: MoneyValue: @Configurable;
     
 }

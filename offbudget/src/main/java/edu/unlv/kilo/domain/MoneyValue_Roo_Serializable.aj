@@ -3,11 +3,11 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.TransactionDescription;
+import edu.unlv.kilo.domain.MoneyValue;
 import java.io.Serializable;
 
-privileged aspect TransactionDescription_Roo_Serializable {
+privileged aspect MoneyValue_Roo_Serializable {
     
-    declare parents: TransactionDescription implements Serializable;
+    declare parents: MoneyValue implements Serializable;
     
 }

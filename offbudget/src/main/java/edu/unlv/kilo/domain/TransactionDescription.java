@@ -15,7 +15,12 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooSerializable
 public class TransactionDescription {
 
-    private String description;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6629381691976834814L;
+
+	private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")

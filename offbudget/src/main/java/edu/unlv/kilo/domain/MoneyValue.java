@@ -1,4 +1,4 @@
-package domain;
+package edu.unlv.kilo.domain;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -11,5 +11,9 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooSerializable
 public class MoneyValue {
 
-    private long amount;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private long amount;
 }

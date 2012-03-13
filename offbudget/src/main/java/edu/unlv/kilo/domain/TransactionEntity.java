@@ -1,4 +1,4 @@
-package domain;
+package edu.unlv.kilo.domain;
 
 import javax.persistence.ManyToOne;
 import org.springframework.roo.addon.javabean.RooJavaBean;
