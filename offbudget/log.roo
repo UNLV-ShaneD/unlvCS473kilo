@@ -1,0 +1,39 @@
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-13 09:36:28
+project --topLevelPackage edu.unlv.kilo --projectName offbudget --java 6 --packaging JAR
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-13 09:36:29
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-13 09:39:13
+hint
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY 
+hint
+download status
+download accept terms of use
+addon info id 01
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml.zip
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.entity
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml.zip
+addon install id --searchResultId 01
+hint
+// [failed] entity jpa --class ~.domain.Transaction
+entity jpa --class ~.domain.TransactionEntity
+entity jpa --class ~.domain.MoneyValue --serializable 
+field number --fieldName amount --type long
+help
+hint
+hint fields
+field reference --class ~.domain.TransactionEntity --fieldName amount --type ~.domain.MoneyValue
+// [failed] field date --fieldName date --type java.util.Date
+// [failed] field date --fieldName when --type java.util.Date
+field date --fieldName timeof --type java.util.Date
+entity jpa --class ~.domain.TransactionDescription --serializable 
+field string --fieldName description
+field date --fieldName timeof --type java.util.Date
+hint
+hint web mvc
+field string --fieldName comment
+// [failed] web mvc setup
+hint
+hint web mvc
+web mvc setup
+hint web mvc
+web mvc scaffold --class ~.web.MainController
+hint

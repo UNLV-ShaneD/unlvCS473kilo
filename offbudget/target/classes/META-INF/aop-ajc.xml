@@ -1,0 +1,16 @@
+<aspectj>
+<aspects>
+<aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_JavaBean"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Jpa_Entity"/>
+<aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_Configurable"/>
+<aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_Jpa_Entity"/>
+<aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_Jpa_ActiveRecord"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Serializable"/>
+<aspect name="edu.unlv.kilo.domain.TransactionEntity_Roo_ToString"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_JavaBean"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Jpa_ActiveRecord"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_Configurable"/>
+<aspect name="edu.unlv.kilo.domain.TransactionDescription_Roo_ToString"/>
+</aspects>
+</aspectj>
+
