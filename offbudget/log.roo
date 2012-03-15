@@ -37,3 +37,6 @@ web mvc setup
 hint web mvc
 web mvc scaffold --class ~.web.MainController
 hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-15 10:14:11
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-15 10:37:33
