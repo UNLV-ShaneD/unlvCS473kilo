@@ -4,7 +4,6 @@
 package edu.unlv.kilo.domain;
 
 import edu.unlv.kilo.domain.TransactionDescription;
-import java.util.Date;
 
 privileged aspect TransactionDescription_Roo_JavaBean {
     
@@ -14,14 +13,6 @@ privileged aspect TransactionDescription_Roo_JavaBean {
     
     public void TransactionDescription.setDescription(String description) {
         this.description = description;
-    }
-    
-    public Date TransactionDescription.getTimeof() {
-        return this.timeof;
-    }
-    
-    public void TransactionDescription.setTimeof(Date timeof) {
-        this.timeof = timeof;
     }
     
     public String TransactionDescription.getComment() {

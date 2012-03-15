@@ -4,7 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_edu_unlv_kilo_domain_TransactionDescription" object="${transactiondescription}" path="/transactiondescriptions" z="GXe2vNnfqpj+EFtrcGzxHXGkWLg=">
         <field:display field="description" id="s_edu_unlv_kilo_domain_TransactionDescription_description" object="${transactiondescription}" z="eaL40hm3c3KNuYBCzIr8kajNQHc="/>
-        <field:display date="true" dateTimePattern="${transactionDescription_timeof_date_format}" field="timeof" id="s_edu_unlv_kilo_domain_TransactionDescription_timeof" object="${transactiondescription}" z="f75FCSz4ZCZZ2BjJ/AXugtn+pcQ="/>
         <field:display field="comment" id="s_edu_unlv_kilo_domain_TransactionDescription_comment" object="${transactiondescription}" z="iuZLOv9fx7UT5fUJys17MLmH064="/>
     </page:show>
 </div>

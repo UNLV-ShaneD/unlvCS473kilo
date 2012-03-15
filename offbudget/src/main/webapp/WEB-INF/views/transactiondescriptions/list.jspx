@@ -5,7 +5,6 @@
     <page:list id="pl_edu_unlv_kilo_domain_TransactionDescription" items="${transactiondescriptions}" z="cVuvKccfIPXW0tf50Ew/uOs7ptE=">
         <table:table data="${transactiondescriptions}" id="l_edu_unlv_kilo_domain_TransactionDescription" path="/transactiondescriptions" z="Ad/A53CWMpMHkDch8YQnm1K9OBQ=">
             <table:column id="c_edu_unlv_kilo_domain_TransactionDescription_description" property="description" z="aNhCMZR6BzEf3wbNP8SInZsQXhQ="/>
-            <table:column date="true" dateTimePattern="${transactionDescription_timeof_date_format}" id="c_edu_unlv_kilo_domain_TransactionDescription_timeof" property="timeof" z="doEcxD/S0uNoDd8ZhrRN6T6/65U="/>
             <table:column id="c_edu_unlv_kilo_domain_TransactionDescription_comment" property="comment" z="r+R34diqO8ON398WhnOtpsezEiU="/>
         </table:table>
     </page:list>

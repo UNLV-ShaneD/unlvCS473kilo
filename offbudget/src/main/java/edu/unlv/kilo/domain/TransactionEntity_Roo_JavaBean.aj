@@ -4,7 +4,9 @@
 package edu.unlv.kilo.domain;
 
 import edu.unlv.kilo.domain.MoneyValue;
+import edu.unlv.kilo.domain.TransactionDescription;
 import edu.unlv.kilo.domain.TransactionEntity;
+import java.util.Date;
 
 privileged aspect TransactionEntity_Roo_JavaBean {
     
@@ -14,6 +16,22 @@ privileged aspect TransactionEntity_Roo_JavaBean {
     
     public void TransactionEntity.setAmount(MoneyValue amount) {
         this.amount = amount;
+    }
+    
+    public Date TransactionEntity.getTimeof() {
+        return this.timeof;
+    }
+    
+    public void TransactionEntity.setTimeof(Date timeof) {
+        this.timeof = timeof;
+    }
+    
+    public TransactionDescription TransactionEntity.getDescription() {
+        return this.description;
+    }
+    
+    public void TransactionEntity.setDescription(TransactionDescription description) {
+        this.description = description;
     }
     
 }

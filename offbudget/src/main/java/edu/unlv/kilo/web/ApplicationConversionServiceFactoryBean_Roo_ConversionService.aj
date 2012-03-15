@@ -16,7 +16,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<TransactionDescription, String> ApplicationConversionServiceFactoryBean.getTransactionDescriptionToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<edu.unlv.kilo.domain.TransactionDescription, java.lang.String>() {
             public String convert(TransactionDescription transactionDescription) {
-                return new StringBuilder().append(transactionDescription.getDescription()).append(" ").append(transactionDescription.getTimeof()).append(" ").append(transactionDescription.getComment()).toString();
+                return new StringBuilder().append(transactionDescription.getDescription()).append(" ").append(transactionDescription.getComment()).toString();
             }
         };
     }

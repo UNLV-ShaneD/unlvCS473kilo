@@ -8,8 +8,6 @@ import edu.unlv.kilo.web.MainController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +38,6 @@ privileged aspect MainController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String MainController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("transactiondescription", TransactionDescription.findTransactionDescription(id));
         uiModel.addAttribute("itemId", id);
         return "transactiondescriptions/show";
@@ -57,7 +54,6 @@ privileged aspect MainController_Roo_Controller {
         } else {
             uiModel.addAttribute("transactiondescriptions", TransactionDescription.findAllTransactionDescriptions());
         }
-        addDateTimeFormatPatterns(uiModel);
         return "transactiondescriptions/list";
     }
     
@@ -88,13 +84,8 @@ privileged aspect MainController_Roo_Controller {
         return "redirect:/transactiondescriptions";
     }
     
-    void MainController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("transactionDescription_timeof_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
-    
     void MainController.populateEditForm(Model uiModel, TransactionDescription transactionDescription) {
         uiModel.addAttribute("transactionDescription", transactionDescription);
-        addDateTimeFormatPatterns(uiModel);
     }
     
     String MainController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

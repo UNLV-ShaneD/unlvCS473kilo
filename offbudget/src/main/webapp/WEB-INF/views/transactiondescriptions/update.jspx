@@ -4,7 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_edu_unlv_kilo_domain_TransactionDescription" modelAttribute="transactionDescription" path="/transactiondescriptions" versionField="Version" z="p0/OaeV68sbQymRvZE0VQ+aDIdE=">
         <field:input field="description" id="c_edu_unlv_kilo_domain_TransactionDescription_description" z="RM7+SWE9oRHRXyMALzEpxY6ijo4="/>
-        <field:datetime dateTimePattern="${transactionDescription_timeof_date_format}" field="timeof" id="c_edu_unlv_kilo_domain_TransactionDescription_timeof" z="e97borA9AeubOj9jEprzCGTaQsg="/>
         <field:input field="comment" id="c_edu_unlv_kilo_domain_TransactionDescription_comment" z="t1fGdp0B+kgLiQDeUG7ZAcRz84A="/>
     </form:update>
 </div>

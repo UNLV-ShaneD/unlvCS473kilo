@@ -40,3 +40,5 @@ hint
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-15 10:14:11
 hint
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-15 10:37:33
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-15 10:45:05
+field reference --class ~.domain.TransactionEntity --fieldName description --type ~.domain.TransactionDescription
