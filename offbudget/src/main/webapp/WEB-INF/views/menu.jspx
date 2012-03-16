@@ -7,5 +7,8 @@
             <menu:item id="i_transactiondescription_new" messageCode="global_menu_new" url="/transactiondescriptions?form" z="IZOLiy9kl5FyRVB3VX0ilBCj1ls="/>
             <menu:item id="i_transactiondescription_list" messageCode="global_menu_list" url="/transactiondescriptions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="xmGU6bVX7n9X+5+6jKEdriB5ESo="/>
         </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__taggingindex_id" messageCode="global_generic" url="/tagging/index" z="6CENgNay25eDFeG6ZP2gz3iX0eo="/>
+        </menu:category>
     </menu:menu>
 </div>
