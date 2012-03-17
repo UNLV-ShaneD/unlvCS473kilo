@@ -49,3 +49,14 @@ web mvc controller --class ~.web.TaggingController
 hint
 hint eclipse
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-16 11:17:52
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-16 21:47:46
+hint
+hint finders
+hint entities
+entity jpa --class ~.domain.ItemEntity
+field set --fieldName transactions --type ~.domain.TransactionEntity
+entity jpa --class ~.domain.ItemAdjustment
+hint
+field string --fieldName description
+field date --fieldName effectiveDate --type java.util.Date
+field set --class ~.domain.ItemEntity --type ~.domain.ItemAdjustment --fieldName adjustments
