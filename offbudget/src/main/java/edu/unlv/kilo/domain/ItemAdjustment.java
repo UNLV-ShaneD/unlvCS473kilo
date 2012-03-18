@@ -12,7 +12,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord
 public class ItemAdjustment {
-
+	
 	/**
 	 * A user-friendly name for this adjustment. Not necessarily unique.
 	 */
