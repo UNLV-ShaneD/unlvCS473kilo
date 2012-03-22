@@ -25,37 +25,6 @@ public class TaggingView {
 	List<TransactionEntity> transactions;
 	
 	/**
-	 * Debug constructor
-	 * uses a demonstration list of transactions
-	 * not to be used in release
-	 */
-	TaggingView() {
-		this.transactions = new LinkedList<TransactionEntity>();
-		
-		{
-			TransactionEntity a = new TransactionEntity();
-			a.setAmount(new MoneyValue(300));
-			a.setTimeof(new Date(2012,03,01));
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Test transaction A");
-			a.setDescription(desc);
-			
-			transactions.add(a);
-		}
-		
-		{
-			TransactionEntity a = new TransactionEntity();
-			a.setAmount(new MoneyValue(300));
-			a.setTimeof(new Date(2012,03,05));
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Test transaction B");
-			a.setDescription(desc);
-			
-			transactions.add(a);
-		};
-	}
-	
-	/**
 	 * Creates a tagging view for the specified list of transactions
 	 * This view will be used to put said transactions into expenses (deprecated name: itemEntities)
 	 * @param transactions List of transactions to prompt for sorting into expenses
@@ -71,10 +40,14 @@ public class TaggingView {
 	 */
 	private String renderDeleteForm(int id) {
 		String out = "";
-		out += "<form id=\"command\" action=\"/offbudget/tagging/index\" method=\"post\"><input type=\"hidden\" name=\"_method\" value=\"DELETE\"/>";
-		out += "<input type=\"hidden\" name=\"_id\" value=\"" + id + "\"/>";
-		out += "<input onclick=\"return confirm('Are you sure want to delete this transaction?');\" value=\"Delete Transaction\" type=\"image\" title=\"Delete Transaction\" src=\"/offbudget/resources/images/delete.png\" class=\"image\" alt=\"Delete Transaction\"/>";
-		out += "</form>";
+		out += "<td><form id=\"command\" action=\"/offbudget/tagging/index\" method=\"post\"><input type=\"hidden\" name=\"method\" value=\"REMOVE\"/>";
+		out += "<input type=\"hidden\" name=\"id\" value=\"" + id + "\"/>";
+		out += "<input value=\"Remove Transaction\" type=\"image\" title=\"Remove Transaction\" src=\"/offbudget/resources/images/delete.png\" class=\"image\" alt=\"Remove transaction from selection\"/>";
+		out += "</form></td>";
+		out += "<td><form id=\"command\" action=\"/offbudget/tagging/index\" method=\"post\"><input type=\"hidden\" name=\"method\" value=\"DELETE\"/>";
+		out += "<input type=\"hidden\" name=\"id\" value=\"" + id + "\"/>";
+		out += "<input onclick=\"return confirm('Are you sure want to delete this transaction from offBudget?');\" value=\"Delete Transaction\" type=\"image\" title=\"Delete transaction\" src=\"/offbudget/resources/images/delete.png\" class=\"image\" alt=\"Delete Transaction\"/>";
+		out += "</form></td>";
 		return out;
 	}
 	
@@ -91,17 +64,18 @@ public class TaggingView {
 				"		<th>Description</th>" +
 				"		<th>Amount</th>" +
 				"		<th />" +
+				"		<th />" +
 				"	</tr>" +
 				"";
 		
 		int id = 0;
 		for (TransactionEntity transactionEntity : transactions) {
-			++id;
-			
 			output += "<tr>";
 			output += transactionEntity.getTDset();
-			output += "<td>" + renderDeleteForm(id) + "</td>";
+			output += renderDeleteForm(id);
 			output += "</tr>";
+			
+			++id;
 		}
 		
 		output += "</table>";
