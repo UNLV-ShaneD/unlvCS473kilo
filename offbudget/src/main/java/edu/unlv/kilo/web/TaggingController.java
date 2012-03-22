@@ -21,7 +21,7 @@ import edu.unlv.kilo.domain.TransactionEntity;
 @RequestMapping("/tagging/**")
 @Controller
 public class TaggingController {
-	int test;
+	List<TransactionEntity> transactions = new ArrayList<TransactionEntity>();
 
 	@RequestMapping(method = RequestMethod.POST, value = "{id}")
 	public void post(@PathVariable Long id, ModelMap modelMap,
@@ -55,16 +55,12 @@ public class TaggingController {
 
 	@RequestMapping
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpSession session) {
-		List<TransactionEntity> transactions = (List<TransactionEntity>)session.getAttribute("transactions");
-		if (transactions == null) {
+		if (transactions.size() == 0) {
 			transactions = new ArrayList<TransactionEntity>();
 			addDummyTransactions(transactions);
 			session.setAttribute("transactions", transactions);
 		}
 		
-		test = 3;
-		modelMap.addAttribute("test", request.getParameter("method") + request.getParameter("id"));
-
 		try {
 			String command = request.getParameter("method");
 			TaggingAction action = TaggingAction.get(command);

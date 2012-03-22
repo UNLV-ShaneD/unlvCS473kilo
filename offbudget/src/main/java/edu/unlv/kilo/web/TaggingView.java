@@ -58,7 +58,16 @@ public class TaggingView {
 	void render(ModelMap modelMap) {
 		modelMap.addAttribute("transactions", transactions);
 		
-		String output = "<table>" +
+		String output = "";
+		
+		// Filter form
+		output += "<div><form id=\"command\" action=\"/offbudget/tagging/index\" method=\"post\"><input type=\"hidden\" name=\"method\" value=\"FILTER\"/>";
+		output += "<input type=\"hidden\" name=\"id\" value=\"0\"/>";
+		output += "<label for=\"filter\">Filter : </filter>";
+		output += "<input id=\"filter\" name=\"Filter\" value=\"\" type=\"text\" />";
+		output += "</form></div>";
+		
+		output += "<table>" +
 				"	<tr>" +
 				"		<th>Date</th>" +
 				"		<th>Description</th>" +
@@ -81,6 +90,5 @@ public class TaggingView {
 		output += "</table>";
 		
 		modelMap.addAttribute("output", output);
-		modelMap.addAttribute("transactions", transactions);
 	}
 }
