@@ -23,41 +23,19 @@ import edu.unlv.kilo.domain.TransactionEntity;
 public class TaggingController {
 	int test;
 
-	// WTF: This never gets called when post data is submitted
 	@RequestMapping(method = RequestMethod.POST, value = "{id}")
 	public void post(@PathVariable Long id, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response) {
 	}
 
-	
-
-	// WTF: This never gets called when post data is submitted
-	@RequestMapping(method = RequestMethod.POST)
-	public void pasta(ModelMap modelMap, HttpServletRequest request) {
-//		modelMap.addAttribute("msg","</h4><h3>helloworld</h3><h4>");
-		TaggingView taggingView = new TaggingView();
-		taggingView.render(modelMap);
-
-		test = 2;
-		modelMap.addAttribute("test", test);
-		
-	}
-
-	// WTF: This never gets called when post data is submitted
-	@RequestMapping(method = RequestMethod.GET)
-	public String get(ModelMap modelMap, HttpServletRequest request) {
-//		modelMap.addAttribute("msg","</h4><h3>helloworld</h3><h4>");
-		TaggingView taggingView = new TaggingView();
-		taggingView.render(modelMap);
-
-		test = 1;
-		modelMap.addAttribute("test", test);
-		
-		return "tagging/index"; // this return does nothing
-	}
-
 	@RequestMapping
-	public String index() {
+	public String index(ModelMap modelMap, HttpServletRequest request) {
+		test = 3;
+		modelMap.addAttribute("test", request.getParameter("_method") + request.getParameter("_id"));
+
+		TaggingView taggingView = new TaggingView();
+		taggingView.render(modelMap);
+		
 		return "tagging/index";
 	}
 }
