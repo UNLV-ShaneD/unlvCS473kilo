@@ -12,7 +12,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord
 public class ItemAdjustment {
-	
+
 	/**
 	 * A user-friendly name for this adjustment. Not necessarily unique.
 	 */
@@ -54,7 +54,7 @@ public class ItemAdjustment {
 	 * Determine whether this adjustment should be run again (recurring)
 	 * 
 	 * Returns true if we should keep using this adjustment for future transaction projections (recurring adjustment)
-	 * Returns false if we should ignore this adjustment for future transaction projections (one-off adjustment)
+	 * Returns false if we should ignore this adjustment for this and future transaction projections (one-off adjustment)
 	 * 
 	 * @param iterationNumber The number n as in the statement: This is the *n*th projected transaction this adjustment is affecting. For the first call to this method, this parameter will be 1.
 	 * @param nextDate The date of the next projected transaction (after being adjusted by this adjustment's projectTransactionInterval method)

@@ -5,6 +5,8 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test/main/java/edu/unlv/kilo"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test/main/java"/>
         <property name="context-root" value="offbudget"/>
         <property name="java-output-path" value="/offbudget/target/classes"/>
     </wb-module>

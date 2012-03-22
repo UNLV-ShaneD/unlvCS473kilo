@@ -24,6 +24,10 @@ privileged aspect MoneyValue_Roo_Jpa_Entity {
     @Column(name = "version")
     private Integer MoneyValue.version;
     
+    public MoneyValue.new() {
+        super();
+    }
+
     public Long MoneyValue.getId() {
         return this.id;
     }

@@ -23,4 +23,10 @@ public class TransactionEntity {
 
     @ManyToOne
     private TransactionDescription description;
+    
+    public String getTDset() {
+    	return "	<td>" + getTimeof() + "</td>" +
+				"	<td>" + getDescription().getDescription() + "</td>" +
+				"	<td>" + getAmount().toPrintable() + "</td>";
+    }
 }

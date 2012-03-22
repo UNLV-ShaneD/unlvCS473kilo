@@ -60,7 +60,7 @@ hint
 field string --fieldName description
 field date --fieldName effectiveDate --type java.util.Date
 field set --class ~.domain.ItemEntity --type ~.domain.ItemAdjustment --fieldName adjustments
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-17 22:43:27
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-17 22:51:33
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-17 22:52:09
-// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-17 23:00:07
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-19 16:06:22
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-19 16:09:00
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-19 16:33:32
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-21 21:43:06
