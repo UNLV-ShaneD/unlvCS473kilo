@@ -25,7 +25,8 @@
 				<th />
 			</tr>
 			<c:forEach var="transaction" varStatus="transactionStatus"
-				items="${transactions}">
+				items="${filteredtransactions}">
+				
 				<tr>
 					<td>${transaction.timeof}</td>
 					<td>${transaction.description.description}</td>

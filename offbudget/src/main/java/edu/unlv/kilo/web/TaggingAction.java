@@ -8,18 +8,9 @@ import java.util.Map;
 import edu.unlv.kilo.domain.TransactionEntity;
 
 public enum TaggingAction {
-	REMOVE("REMOVE") {
-		@Override
-		public void execute(List<TransactionEntity> transactions, int index) {
-			transactions.remove(index);
-		};
-	},
-	DELETE("DELETE") {
-		@Override
-		public void execute(List<TransactionEntity> transactions, int index) {
-			TransactionEntity transaction = transactions.get(index);
-		};
-	};
+	REMOVE("REMOVE"),
+	DELETE("DELETE"),
+	FILTER("FILTER");
 	
 	TaggingAction(String textCommand) {
 		this.textCommand = textCommand;
@@ -38,7 +29,5 @@ public enum TaggingAction {
 
 	// String representation of an action
 	String textCommand;
-	
-	public abstract void execute(List<TransactionEntity> transactions, int index);
 	
 }

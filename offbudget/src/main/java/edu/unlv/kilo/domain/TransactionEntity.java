@@ -29,4 +29,13 @@ public class TransactionEntity {
 				"	<td>" + getDescription().getDescription() + "</td>" +
 				"	<td>" + getAmount().getPrintable() + "</td>";
     }
+
+    /**
+     * Checks if the description contains a substring
+     * @param query substring to search for
+     * @return
+     */
+	public boolean descriptionHasSubstring(String query) {
+		return description.descriptionHasSubstring(query);
+	}
 }

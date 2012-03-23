@@ -19,4 +19,13 @@ public class TransactionDescription {
 	private String description;
 
     private String comment;
+
+    /**
+     * Checks if description has a substring
+     * @param query text to search for
+     * @return
+     */
+	public boolean descriptionHasSubstring(String query) {
+		return description.contains(query);
+	}
 }

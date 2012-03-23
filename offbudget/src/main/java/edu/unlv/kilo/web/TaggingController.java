@@ -2,6 +2,7 @@ package edu.unlv.kilo.web;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +23,14 @@ import edu.unlv.kilo.domain.TransactionEntity;
 @Controller
 public class TaggingController {
 	List<TransactionEntity> transactions = new ArrayList<TransactionEntity>();
+	List<MonetaryTransactionFilter> filters = new ArrayList<MonetaryTransactionFilter>();
 
 	@RequestMapping(method = RequestMethod.POST, value = "{id}")
 	public void post(@PathVariable Long id, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response) {
 	}
 	
-	private void addDummyTransactions(List<TransactionEntity> transactions) {
+	private void addDummyTransactionsAndFilter(List<TransactionEntity> transactions) {
 
 		{
 			TransactionEntity a = new TransactionEntity();
@@ -51,16 +53,46 @@ public class TaggingController {
 			
 			transactions.add(a);
 		};
+		
+		{
+			TransactionEntity a = new TransactionEntity();
+			a.setAmount(new MoneyValue(300));
+			a.setTimeof(new Date(2012,03,05));
+			TransactionDescription desc = new TransactionDescription();
+			desc.setDescription("Rest tiontracsan sigma");
+			a.setDescription(desc);
+			
+			transactions.add(a);
+		};
+		
+		try {
+			MonetaryTransactionFilterDescription filter = new MonetaryTransactionFilterDescription("sigma", true);
+			filters.add(filter);
+		} catch (Exception e) {
+			// Do nothing
+		}
+	}
+	
+	public void actionDelete(int index) {
+		TransactionEntity transaction = transactions.get(index);
+	}
+	
+	public void actionRemove(int index) {
+		transactions.remove(index);
+	}
+	
+	public void actionFilter() {
 	}
 
 	@RequestMapping
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpSession session) {
 		if (transactions.size() == 0) {
 			transactions = new ArrayList<TransactionEntity>();
-			addDummyTransactions(transactions);
+			addDummyTransactionsAndFilter(transactions);
 			session.setAttribute("transactions", transactions);
 		}
 		
+		// Execute any posted commands (e.g. delete transaction, remove transaction)
 		try {
 			String command = request.getParameter("method");
 			TaggingAction action = TaggingAction.get(command);
@@ -68,16 +100,45 @@ public class TaggingController {
 			String id = request.getParameter("id");
 			int index = Integer.parseInt(id);
 			
-			action.execute(transactions, index);
+			switch (action) {
+			case DELETE:
+				actionDelete(index);
+			case REMOVE:
+				actionRemove(index);
+			case FILTER:
+				actionFilter();
+			}
+			
+//			action.execute(this);
 		} catch (NumberFormatException e) {
 			// Do nothing
 		} catch (IndexOutOfBoundsException e) {
 			// Do nothing
 		}
 
+		// Build model
 		modelMap.addAttribute("transactions", transactions);
+
+		// Filter transactions
+		List<TransactionEntity> filteredTransactions = new LinkedList<TransactionEntity>();
+		List<TransactionEntity> antifilteredTransactions = new LinkedList<TransactionEntity>();
+		filterTransactions(filteredTransactions, antifilteredTransactions);
+		modelMap.addAttribute("filteredtransactions", filteredTransactions);
+		modelMap.addAttribute("antifilteredtransactions", antifilteredTransactions);
 		
 		return "tagging/index";
+	}
+	
+	private void filterTransactions(List<TransactionEntity> filteredTransactions, List<TransactionEntity> antifilteredTransactions) {
+		for (TransactionEntity transaction : transactions) {
+			for (MonetaryTransactionFilter filter : filters) {
+				if (filter.checkPasses(transaction)) {
+					filteredTransactions.add(transaction);
+				} else {
+					antifilteredTransactions.add(transaction);
+				}
+			}
+		}
 	}
 	
 	/**
