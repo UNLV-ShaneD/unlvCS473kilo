@@ -75,9 +75,7 @@ public class TaggingController {
 			// Do nothing
 		}
 
-		TaggingView taggingView = new TaggingView(transactions);
-		taggingView.render(modelMap);
-		
+		modelMap.addAttribute("transactions", transactions);
 		
 		return "tagging/index";
 	}

@@ -27,6 +27,6 @@ public class TransactionEntity {
     public String getTDset() {
     	return "	<td>" + getTimeof() + "</td>" +
 				"	<td>" + getDescription().getDescription() + "</td>" +
-				"	<td>" + getAmount().toPrintable() + "</td>";
+				"	<td>" + getAmount().getPrintable() + "</td>";
     }
 }

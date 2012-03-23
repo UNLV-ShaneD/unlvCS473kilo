@@ -1,5 +1,6 @@
 package edu.unlv.kilo.domain;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.serializable.RooSerializable;
@@ -27,7 +28,8 @@ public class MoneyValue {
 	 * ex: $1.23
 	 * @return Value in user-readable format
 	 */
-	public String toPrintable() {
+	@Bean
+	public String getPrintable() {
 		java.text.DecimalFormat format = new java.text.DecimalFormat("$0.00;($0.00)");
 
 		return format.format(((double)amount)/100.0);
