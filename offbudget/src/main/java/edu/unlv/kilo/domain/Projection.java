@@ -14,11 +14,11 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord
 public class Projection {
-	private static List<MoneyValue> current_balance;
+	private static List<MoneyValue> balance_data;
 	
 	// Private constructor prevents instantiation from other classes.
     private Projection() { 	
-    	Projection.current_balance = null;
+    	Projection.balance_data = new ArrayList<MoneyValue>();
     }
     
     /**
@@ -30,10 +30,20 @@ public class Projection {
      * @return The requested data for plotting the graphs in a List.
      */
     public List<MoneyValue> getData(Date startDate, Date endDate, int interval){
+    	MoneyValue current;
+    	ItemEntity item = new ItemEntity();				// placeholder
+    	ItemAdjustment adjust = new ItemAdjustment();	// placeholder
+    	Set<TransactionEntity> trans = item.getTransactions();
+    	Iterator<TransactionEntity> it = trans.iterator();
     	
+    	while (it.hasNext()){
+    		current = it.next().getAmount();
+    		
+    		if (adjust.determineRecurrence(1, startDate, current))
+    			adjust.projectTransactionAmount(1, current);
+    	}
     	
-    	
-    	return current_balance;
+    	return balance_data;
     }
 
 	

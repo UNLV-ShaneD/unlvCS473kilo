@@ -20,4 +20,8 @@ public class ItemEntity {
     private Set<ItemAdjustment> adjustments = new HashSet<ItemAdjustment>();
 
     private Boolean inflation;
+    
+    public ItemEntity (){
+    	
+    }
 }
