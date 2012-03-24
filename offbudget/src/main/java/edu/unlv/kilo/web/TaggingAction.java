@@ -10,7 +10,8 @@ import edu.unlv.kilo.domain.TransactionEntity;
 public enum TaggingAction {
 	REMOVE("REMOVE"),
 	DELETE("DELETE"),
-	FILTER("FILTER");
+	FILTER("FILTER"),
+	REMOVEFILTER("REMOVEFILTER");
 	
 	TaggingAction(String textCommand) {
 		this.textCommand = textCommand;

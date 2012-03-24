@@ -1,6 +1,7 @@
 package edu.unlv.kilo.web;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,42 +33,47 @@ public class TaggingController {
 	
 	private void addDummyTransactionsAndFilter(List<TransactionEntity> transactions) {
 
+		Calendar calendar = Calendar.getInstance();
 		{
-			TransactionEntity a = new TransactionEntity();
-			a.setAmount(new MoneyValue(300));
-			a.setTimeof(new Date(2012,03,01));
+			TransactionEntity transaction = new TransactionEntity();
+			transaction.setAmount(new MoneyValue(300));
+			calendar.set(2012, 03, 01);
+			transaction.setTimeof(calendar.getTime());
 			TransactionDescription desc = new TransactionDescription();
 			desc.setDescription("Test transaction A");
-			a.setDescription(desc);
+			transaction.setDescription(desc);
 			
-			transactions.add(a);
+			transactions.add(transaction);
 		}
 		
 		{
-			TransactionEntity a = new TransactionEntity();
-			a.setAmount(new MoneyValue(300));
-			a.setTimeof(new Date(2012,03,05));
+			TransactionEntity transaction = new TransactionEntity();
+			transaction.setAmount(new MoneyValue(300));
+			calendar.set(2012, 03, 02);
+			transaction.setTimeof(calendar.getTime());
 			TransactionDescription desc = new TransactionDescription();
 			desc.setDescription("Test transaction B");
-			a.setDescription(desc);
+			transaction.setDescription(desc);
 			
-			transactions.add(a);
+			transactions.add(transaction);
 		};
 		
 		{
-			TransactionEntity a = new TransactionEntity();
-			a.setAmount(new MoneyValue(300));
-			a.setTimeof(new Date(2012,03,05));
+			TransactionEntity transaction = new TransactionEntity();
+			transaction.setAmount(new MoneyValue(300));
+			calendar.set(2012, 03, 05);
+			transaction.setTimeof(calendar.getTime());
+			
 			TransactionDescription desc = new TransactionDescription();
 			desc.setDescription("Rest tiontracsan sigma");
-			a.setDescription(desc);
+			transaction.setDescription(desc);
 			
-			transactions.add(a);
+			transactions.add(transaction);
 		};
 		
 		try {
 			MonetaryTransactionFilterDescription filter = new MonetaryTransactionFilterDescription("sigma", true);
-			filters.add(filter);
+//			filters.add(filter);
 		} catch (Exception e) {
 			// Do nothing
 		}
@@ -81,7 +87,17 @@ public class TaggingController {
 		transactions.remove(index);
 	}
 	
-	public void actionFilter() {
+	public void actionFilter(String filterText, boolean exclusive) {
+		try {
+			MonetaryTransactionFilterDescription filter = new MonetaryTransactionFilterDescription(filterText, exclusive);
+			filters.add(filter);
+		} catch (Exception e) {
+			// Non-critical invalid input detected; do nothing
+		}
+	}
+	
+	public void actionRemoveFilter(int index) {
+		filters.remove(index);
 	}
 
 	@RequestMapping
@@ -103,10 +119,19 @@ public class TaggingController {
 			switch (action) {
 			case DELETE:
 				actionDelete(index);
+				break;
 			case REMOVE:
 				actionRemove(index);
+				break;
 			case FILTER:
-				actionFilter();
+				String filterText = request.getParameter("filterText");
+				String filterExclusive = request.getParameter("filterExclusive");
+				
+				actionFilter(filterText, filterExclusive != null);
+				break;
+			case REMOVEFILTER:
+				actionRemoveFilter(index);
+				break;
 			}
 			
 //			action.execute(this);
@@ -118,6 +143,7 @@ public class TaggingController {
 
 		// Build model
 		modelMap.addAttribute("transactions", transactions);
+		modelMap.addAttribute("filters", filters);
 
 		// Filter transactions
 		List<TransactionEntity> filteredTransactions = new LinkedList<TransactionEntity>();
@@ -131,12 +157,18 @@ public class TaggingController {
 	
 	private void filterTransactions(List<TransactionEntity> filteredTransactions, List<TransactionEntity> antifilteredTransactions) {
 		for (TransactionEntity transaction : transactions) {
+			boolean pass = true;
 			for (MonetaryTransactionFilter filter : filters) {
-				if (filter.checkPasses(transaction)) {
-					filteredTransactions.add(transaction);
-				} else {
-					antifilteredTransactions.add(transaction);
+				if (!filter.checkPasses(transaction)) {
+					pass = false;
+					break;
 				}
+			}
+			
+			if (pass) {
+				filteredTransactions.add(transaction);
+			} else {
+				antifilteredTransactions.add(transaction);
 			}
 		}
 	}

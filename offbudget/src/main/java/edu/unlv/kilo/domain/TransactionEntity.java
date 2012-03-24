@@ -1,9 +1,12 @@
 package edu.unlv.kilo.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -28,6 +31,15 @@ public class TransactionEntity {
     	return "	<td>" + getTimeof() + "</td>" +
 				"	<td>" + getDescription().getDescription() + "</td>" +
 				"	<td>" + getAmount().getPrintable() + "</td>";
+    }
+    
+    /**
+     * Returns the timeof in user-readable format
+     * @return
+     */
+    public String getPrettyTimeof() {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy' 'MMM' 'd");
+    	return format.format(timeof);
     }
 
     /**

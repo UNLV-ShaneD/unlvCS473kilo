@@ -33,4 +33,19 @@ public class MonetaryTransactionFilterDescription implements
 		return transaction.descriptionHasSubstring(query) != exclusive;
 	}
 
+	@Override
+	public String getUnsafePrettyDescription() {
+		String out = "Description ";
+		if (exclusive) {
+			out += "excludes";
+		}
+		if (!exclusive) {
+			out += "includes";
+		}
+		out += ": ";
+		
+		out += query;
+		return out;
+	}
+
 }

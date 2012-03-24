@@ -11,4 +11,5 @@ import edu.unlv.kilo.domain.TransactionEntity;
  */
 public interface MonetaryTransactionFilter {
 	public abstract boolean checkPasses(TransactionEntity transaction);
+	public abstract String getUnsafePrettyDescription();
 }

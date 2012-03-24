@@ -26,6 +26,6 @@ public class TransactionDescription {
      * @return
      */
 	public boolean descriptionHasSubstring(String query) {
-		return description.contains(query);
+		return description.toLowerCase().contains(query.toLowerCase());
 	}
 }

@@ -8,14 +8,39 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message code="label_tagging_index" htmlEscape="false"
 		var="title" />
-	<util:panel id="none" title="Transaction Selection">
+	<util:panel id="filtering" title="Transaction Filtering">
 		<div>
-			<form id="command" action="/offbudget/tagging/index" method="post">
-				<input type="hidden" name="method" value="FILTER" /> <input
-					type="hidden" name="id" value="0" /> <label for="filter">Filter
-					: </label> <input id="filter" name="Filter" value="" type="text" />
+			<h3>Create a filter:</h3>
+			<form action="/offbudget/tagging/index" method="post">
+				<div>
+					<input type="hidden" name="method" value="FILTER" /> <input
+						type="hidden" name="id" value="0" /> <label for="filter">Filter
+						: </label> <input id="filter" name="filterText" value="" type="text" />
+				</div>
+				<br />
+				<div>
+					<label for="filterExclusive">Exclusive : </label> <input
+						id="filterExclusive" name="filterExclusive" type="checkbox" />
+				</div>
+				<br />
+				<div>
+					<input type="submit" value="Add filter" />
+				</div>
 			</form>
 		</div>
+		<br />
+		<div>
+			<h3>Remove a filter:</h3>
+			<c:forEach var="filter" varStatus="filterStatus" items="${filters}">
+				<form action="/offbudget/tagging/index" method="post">
+					<input type="hidden" name="method" value="REMOVEFILTER" /> <input
+						type="hidden" name="id" value="${filterStatus.index}" /> <input
+						type="submit" value="${filter.unsafePrettyDescription}" />
+				</form>
+			</c:forEach>
+		</div>
+	</util:panel>
+	<util:panel id="selecting" title="Transaction Selection">
 		<table>
 			<tr>
 				<th>Date</th>
@@ -26,9 +51,9 @@
 			</tr>
 			<c:forEach var="transaction" varStatus="transactionStatus"
 				items="${filteredtransactions}">
-				
+
 				<tr>
-					<td>${transaction.timeof}</td>
+					<td>${transaction.prettyTimeof}</td>
 					<td>${transaction.description.description}</td>
 					<td>${transaction.amount.printable}</td>
 					<td>
