@@ -2,7 +2,6 @@ package edu.unlv.kilo.web;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.unlv.kilo.domain.ItemEntity;
 import edu.unlv.kilo.domain.MoneyValue;
 import edu.unlv.kilo.domain.TransactionDescription;
 import edu.unlv.kilo.domain.TransactionEntity;
@@ -24,6 +24,7 @@ import edu.unlv.kilo.domain.TransactionEntity;
 @Controller
 public class TaggingController {
 	List<TransactionEntity> transactions = new ArrayList<TransactionEntity>();
+	List<ItemEntity> items = new ArrayList<ItemEntity>();
 	List<MonetaryTransactionFilter> filters = new ArrayList<MonetaryTransactionFilter>();
 
 	@RequestMapping(method = RequestMethod.POST, value = "{id}")
@@ -103,6 +104,9 @@ public class TaggingController {
 	public void actionRemoveAllFilters() {
 		filters.clear();
 	}
+	
+	public void actionItemCreate(String itemDescription) {
+	}
 
 	@RequestMapping
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpSession session) {
@@ -138,6 +142,13 @@ public class TaggingController {
 				break;
 			case REMOVEALLFILTERS:
 				actionRemoveAllFilters();
+			case ITEMCREATE:
+				String itemDescription = request.getParameter("itemDescription");
+				if (itemDescription.length() == 0)
+				{
+					break;
+				}
+				actionItemCreate(itemDescription);
 			}
 			
 //			action.execute(this);

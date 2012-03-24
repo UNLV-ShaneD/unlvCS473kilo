@@ -49,7 +49,8 @@
 			</c:forEach>
 		</table>
 	</util:panel>
-	<util:panel openPane="false" id="addDescriptionFilter" title="Add a description filter">
+	<util:panel openPane="false" id="addDescriptionFilter"
+		title="Add a description filter">
 		<div>
 			<form action="/offbudget/tagging/index" method="post">
 				<div>
@@ -80,15 +81,35 @@
 			</c:forEach>
 			<form action="/offbudget/tagging/index" method="post">
 				<input type="hidden" name="method" value="REMOVEALLFILTERS" /> <input
-						type="hidden" name="id" value="0" /> <input
-					type="submit" value="Remove all filters" />
+					type="hidden" name="id" value="0" /> <input type="submit"
+					value="Remove all filters" />
 			</form>
 		</div>
 	</util:panel>
-	<util:panel openPane="false" id="itemize" title="Itemize selected transactions">
+	<util:panel openPane="false" id="itemize"
+		title="Itemize selected transactions">
 		<util:panel openPane="false" id="itemNew" title="Create new item">
+			<div>
+				<form action="/offbudget/tagging/index" method="post">
+					<div>
+						<input type="hidden" name="method" value="ITEMCREATE" /> <input
+							type="hidden" name="id" value="0" /> <label for="itemdescription">Item description
+							: </label> <input id="itemdescription" name="itemDescription" value="" type="text" />
+					</div>
+					<br />
+					<div>
+						<label for="filterExclusive">Affected by inflation : </label> <input
+							id="filterExclusive" name="newitemInflation" type="checkbox" />
+					</div>
+					<br />
+					<div>
+						<input type="submit" value="Add filter" />
+					</div>
+				</form>
+			</div>
 		</util:panel>
-		<util:panel openPane="false" id="itemExisting" title="Use existing item">
+		<util:panel openPane="false" id="itemExisting"
+			title="Use existing item">
 		</util:panel>
 	</util:panel>
 </div>

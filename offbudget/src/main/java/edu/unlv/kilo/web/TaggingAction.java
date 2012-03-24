@@ -12,6 +12,7 @@ public enum TaggingAction {
 	DELETE("DELETE"),
 	FILTER("FILTER"),
 	REMOVEFILTER("REMOVEFILTER"),
+	ITEMCREATE("ITEMCREATE"),
 	REMOVEALLFILTERS("REMOVEALLFILTERS");
 	
 	TaggingAction(String textCommand) {

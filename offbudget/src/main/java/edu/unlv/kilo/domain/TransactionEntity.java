@@ -16,6 +16,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord
 public class TransactionEntity {
+	
+	private boolean recurring;
 
     @ManyToOne
     private MoneyValue amount;

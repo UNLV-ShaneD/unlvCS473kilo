@@ -10,6 +10,14 @@ import java.util.Date;
 
 privileged aspect TransactionEntity_Roo_JavaBean {
     
+    public boolean TransactionEntity.isRecurring() {
+        return this.recurring;
+    }
+    
+    public void TransactionEntity.setRecurring(boolean recurring) {
+        this.recurring = recurring;
+    }
+    
     public MoneyValue TransactionEntity.getAmount() {
         return this.amount;
     }

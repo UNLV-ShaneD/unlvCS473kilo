@@ -26,4 +26,12 @@ privileged aspect ItemEntity_Roo_JavaBean {
         this.adjustments = adjustments;
     }
     
+    public Boolean ItemEntity.getInflation() {
+        return this.inflation;
+    }
+    
+    public void ItemEntity.setInflation(Boolean inflation) {
+        this.inflation = inflation;
+    }
+    
 }
