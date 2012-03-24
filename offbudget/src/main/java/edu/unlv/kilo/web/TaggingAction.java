@@ -11,7 +11,8 @@ public enum TaggingAction {
 	REMOVE("REMOVE"),
 	DELETE("DELETE"),
 	FILTER("FILTER"),
-	REMOVEFILTER("REMOVEFILTER");
+	REMOVEFILTER("REMOVEFILTER"),
+	REMOVEALLFILTERS("REMOVEALLFILTERS");
 	
 	TaggingAction(String textCommand) {
 		this.textCommand = textCommand;

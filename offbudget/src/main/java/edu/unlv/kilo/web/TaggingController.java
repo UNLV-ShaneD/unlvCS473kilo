@@ -99,6 +99,10 @@ public class TaggingController {
 	public void actionRemoveFilter(int index) {
 		filters.remove(index);
 	}
+	
+	public void actionRemoveAllFilters() {
+		filters.clear();
+	}
 
 	@RequestMapping
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpSession session) {
@@ -132,6 +136,8 @@ public class TaggingController {
 			case REMOVEFILTER:
 				actionRemoveFilter(index);
 				break;
+			case REMOVEALLFILTERS:
+				actionRemoveAllFilters();
 			}
 			
 //			action.execute(this);

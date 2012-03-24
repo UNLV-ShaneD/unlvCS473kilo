@@ -8,39 +8,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message code="label_tagging_index" htmlEscape="false"
 		var="title" />
-	<util:panel id="filtering" title="Transaction Filtering">
-		<div>
-			<h3>Create a filter:</h3>
-			<form action="/offbudget/tagging/index" method="post">
-				<div>
-					<input type="hidden" name="method" value="FILTER" /> <input
-						type="hidden" name="id" value="0" /> <label for="filter">Filter
-						: </label> <input id="filter" name="filterText" value="" type="text" />
-				</div>
-				<br />
-				<div>
-					<label for="filterExclusive">Exclusive : </label> <input
-						id="filterExclusive" name="filterExclusive" type="checkbox" />
-				</div>
-				<br />
-				<div>
-					<input type="submit" value="Add filter" />
-				</div>
-			</form>
-		</div>
-		<br />
-		<div>
-			<h3>Remove a filter:</h3>
-			<c:forEach var="filter" varStatus="filterStatus" items="${filters}">
-				<form action="/offbudget/tagging/index" method="post">
-					<input type="hidden" name="method" value="REMOVEFILTER" /> <input
-						type="hidden" name="id" value="${filterStatus.index}" /> <input
-						type="submit" value="${filter.unsafePrettyDescription}" />
-				</form>
-			</c:forEach>
-		</div>
-	</util:panel>
-	<util:panel id="selecting" title="Transaction Selection">
+	<util:panel id="transactionSelection" title="Transaction Selection">
 		<table>
 			<tr>
 				<th>Date</th>
@@ -80,5 +48,47 @@
 				</tr>
 			</c:forEach>
 		</table>
+	</util:panel>
+	<util:panel openPane="false" id="addDescriptionFilter" title="Add a description filter">
+		<div>
+			<form action="/offbudget/tagging/index" method="post">
+				<div>
+					<label for="filterExclusive">Exclusive : </label> <input
+						id="filterExclusive" name="filterExclusive" type="checkbox" />
+				</div>
+				<br />
+				<div>
+					<input type="hidden" name="method" value="FILTER" /> <input
+						type="hidden" name="id" value="0" /> <label for="filter">Filter
+						: </label> <input id="filter" name="filterText" value="" type="text" />
+				</div>
+				<br />
+				<div>
+					<input type="submit" value="Add filter" />
+				</div>
+			</form>
+		</div>
+	</util:panel>
+	<util:panel openPane="false" id="removeFilter" title="Remove a filter">
+		<div>
+			<c:forEach var="filter" varStatus="filterStatus" items="${filters}">
+				<form action="/offbudget/tagging/index" method="post">
+					<input type="hidden" name="method" value="REMOVEFILTER" /> <input
+						type="hidden" name="id" value="${filterStatus.index}" /> <input
+						type="submit" value="${filter.unsafePrettyDescription}" />
+				</form>
+			</c:forEach>
+			<form action="/offbudget/tagging/index" method="post">
+				<input type="hidden" name="method" value="REMOVEALLFILTERS" /> <input
+						type="hidden" name="id" value="0" /> <input
+					type="submit" value="Remove all filters" />
+			</form>
+		</div>
+	</util:panel>
+	<util:panel openPane="false" id="itemize" title="Itemize selected transactions">
+		<util:panel openPane="false" id="itemNew" title="Create new item">
+		</util:panel>
+		<util:panel openPane="false" id="itemExisting" title="Use existing item">
+		</util:panel>
 	</util:panel>
 </div>
