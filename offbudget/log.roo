@@ -79,3 +79,9 @@ hint entities
 entity jpa --class ~.domain.Projection --testAutomatically 
 hint
 hint fields
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 22:29:35
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-24 22:38:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 22:38:22
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-24 23:39:10
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 23:39:20
