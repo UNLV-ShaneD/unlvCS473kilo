@@ -76,6 +76,6 @@ public class ItemEntity {
     	
     	Days days = Days.daysBetween(new DateTime(firstDate), new DateTime(lastDate));
     	
-    	return days.getDays();
+    	return days.getDays() / numberRecurringTransactions;
     }
 }
