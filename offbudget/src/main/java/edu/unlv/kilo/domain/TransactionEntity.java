@@ -32,7 +32,7 @@ public class TransactionEntity {
     public String getTDset() {
     	return "	<td>" + getTimeof() + "</td>" +
 				"	<td>" + getDescription().getDescription() + "</td>" +
-				"	<td>" + getAmount.getPrintable() + "</td>";
+				"	<td>" + getAmount().getPrintable() + "</td>";
     }
     
     /**
