@@ -113,6 +113,9 @@ public class TaggingController {
 	 * @param itemRecurrenceInterval
 	 */
 	public void actionItemCreate(String itemDescription, boolean itemInflation, boolean itemRecurrenceAutomatic, int itemRecurrenceInterval) {
+		ItemEntity item = new ItemEntity(itemDescription, itemInflation, itemRecurrenceAutomatic, itemRecurrenceInterval);
+		
+		items.add(item);
 	}
 
 	@RequestMapping

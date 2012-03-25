@@ -24,6 +24,10 @@ privileged aspect ItemEntity_Roo_Jpa_Entity {
     @Column(name = "version")
     private Integer ItemEntity.version;
     
+    public ItemEntity.new() {
+        super();
+    }
+
     public Long ItemEntity.getId() {
         return this.id;
     }

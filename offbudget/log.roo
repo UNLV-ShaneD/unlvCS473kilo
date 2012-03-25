@@ -73,3 +73,5 @@ hint finders
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-23 23:54:08
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 10:10:05
 field boolean --class ~.domain.ItemEntity --fieldName inflation
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-24 23:50:25
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-25 10:17:45
