@@ -74,7 +74,7 @@ public class TaggingController {
 		
 		try {
 			MonetaryTransactionFilterDescription filter = new MonetaryTransactionFilterDescription("sigma", true);
-//			filters.add(filter);
+			filters.add(filter);
 		} catch (Exception e) {
 			// Do nothing
 		}
@@ -105,7 +105,14 @@ public class TaggingController {
 		filters.clear();
 	}
 	
-	public void actionItemCreate(String itemDescription) {
+	/**
+	 * Create an item from the active selection of transactions
+	 * @param itemDescription
+	 * @param itemInflation
+	 * @param itemRecurrenceAutomatic
+	 * @param itemRecurrenceInterval
+	 */
+	public void actionItemCreate(String itemDescription, boolean itemInflation, boolean itemRecurrenceAutomatic, int itemRecurrenceInterval) {
 	}
 
 	@RequestMapping
@@ -143,12 +150,23 @@ public class TaggingController {
 			case REMOVEALLFILTERS:
 				actionRemoveAllFilters();
 			case ITEMCREATE:
-				String itemDescription = request.getParameter("itemDescription");
+				String itemDescription = request.getParameter("newitemDescription");
+				boolean itemInflation = request.getParameter("newitemInflation") == null;
+				boolean itemRecurrenceAutomatic = request.getParameter("newitemRecurrence") == "automatic";
+				String itemRecurrenceIntervalString = request.getParameter("newitemRecurrenceInterval");
+				int itemRecurrenceInterval = 0;
+				if (!itemRecurrenceAutomatic) {
+					itemRecurrenceInterval = Integer.parseInt(itemRecurrenceIntervalString);
+				}
 				if (itemDescription.length() == 0)
 				{
 					break;
 				}
-				actionItemCreate(itemDescription);
+				if (!itemRecurrenceAutomatic && itemRecurrenceInterval <= 0)
+				{
+					break;
+				}
+				actionItemCreate(itemDescription, itemInflation, itemRecurrenceAutomatic, itemRecurrenceInterval);
 			}
 			
 //			action.execute(this);

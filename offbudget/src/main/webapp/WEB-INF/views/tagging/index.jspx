@@ -93,17 +93,32 @@
 				<form action="/offbudget/tagging/index" method="post">
 					<div>
 						<input type="hidden" name="method" value="ITEMCREATE" /> <input
-							type="hidden" name="id" value="0" /> <label for="itemdescription">Item description
-							: </label> <input id="itemdescription" name="itemDescription" value="" type="text" />
+							type="hidden" name="id" value="0" /> <label
+							for="newitemdescription">Item description : </label> <input
+							id="newitemdescription" name="newitemDescription" value="" type="text" />
 					</div>
 					<br />
 					<div>
-						<label for="filterExclusive">Affected by inflation : </label> <input
-							id="filterExclusive" name="newitemInflation" type="checkbox" />
+						<label for="newitemInflation">Affected by inflation : </label> <input
+							id="newitemInflation" name="newitemInflation" type="checkbox" />
 					</div>
 					<br />
 					<div>
-						<input type="submit" value="Add filter" />
+						Recurrence:
+						<div id="newitemRecurrenceBox">
+							<input type="radio" name="newitemRecurrence"
+								id="newitemRecurrenceIntervalAutomatic" value="automatic"
+								checked="checked" />Automatic <br /> <input type="radio"
+								name="newitemRecurrence" id="newitemRecurrenceIntervalManual"
+								value="manual" />Fixed interval between transactions :
+							<input
+								id="newitemRecurrenceInterval" name="newitemRecurrenceInterval"
+								value="" type="text" onclick="document.getElementById('newitemRecurrenceIntervalManual').checked = true;" />
+						</div>
+					</div>
+					<br />
+					<div>
+						<input type="submit" value="Create item" />
 					</div>
 				</form>
 			</div>
