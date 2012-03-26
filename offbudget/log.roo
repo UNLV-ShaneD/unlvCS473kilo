@@ -94,3 +94,4 @@ exit
 entity jpa --class ~.domain.Branch
 field set --fieldName subbranches --type ~.domain.Branch 
 >>>>>>> upstream/master
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 01:30:35

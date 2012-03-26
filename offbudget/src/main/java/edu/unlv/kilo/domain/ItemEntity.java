@@ -24,13 +24,7 @@ public class ItemEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<ItemAdjustment> adjustments = new HashSet<ItemAdjustment>();
-
-<<<<<<< HEAD
-    private Boolean inflation;
     
-    public ItemEntity (){
-    	
-=======
     private String description;
     private boolean inflation;
     
@@ -127,6 +121,5 @@ public class ItemEntity {
     	Days days = Days.daysBetween(new DateTime(firstDate), new DateTime(lastDate));
     	
     	return days.getDays() / numberRecurringTransactions;
->>>>>>> upstream/master
     }
 }
