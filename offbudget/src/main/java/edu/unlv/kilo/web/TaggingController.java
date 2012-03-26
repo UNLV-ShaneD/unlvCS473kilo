@@ -31,9 +31,6 @@ import edu.unlv.kilo.domain.UserData;
  */
 public class TaggingController {
 	
-	// This transactions list is independent of the user transaction list - this way, we can filter only transactions that come from a scrape
-//	List<TransactionEntity> transactions = new ArrayList<TransactionEntity>();
-//	List<ItemEntity> items = new ArrayList<ItemEntity>();
 	List<MonetaryTransactionFilter> filters = new ArrayList<MonetaryTransactionFilter>();
 
 	@RequestMapping(method = RequestMethod.POST, value = "{id}")
@@ -57,21 +54,10 @@ public class TaggingController {
 	public void actionRemoveAllFilters() {
 		filters.clear();
 	}
-	
-	private void debugEnsureUserData(HttpSession session) {
-		UserData userData = UserData.getSessionUserData(session);
-		if (userData == null)
-		{
-			userData = new UserData();
-			UserData.setSessionUserData(session, userData);
-		}
-		
-		userData.makeDebugTransactionsAvailable(session);
-	}
 
 	@RequestMapping
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpSession session) {
-		debugEnsureUserData(session);
+		UserData.debugEnsureUserData(session);
 		UserData userData = UserData.getSessionUserData(session);
 		
 		// Execute any posted commands (e.g. delete transaction, remove transaction)

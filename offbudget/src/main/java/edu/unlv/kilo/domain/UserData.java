@@ -52,6 +52,10 @@ public class UserData {
 		modelMap.addAttribute("antifilteredtransactions", antifilteredTransactions);
 		modelMap.addAttribute("filters", filters);
 	}
+	
+	public void buildAdjustingModel(ModelMap modelMap) {
+		modelMap.addAttribute("items", items);
+	}
 
 	private void addDummyTransactionsAndFilter(
 			List<TransactionEntity> transactions) {
@@ -88,6 +92,17 @@ public class UserData {
 			transactions.add(transaction);
 		}
 		;
+	}
+	
+	public static void debugEnsureUserData(HttpSession session) {
+		UserData userData = UserData.getSessionUserData(session);
+		if (userData == null)
+		{
+			userData = new UserData();
+			UserData.setSessionUserData(session, userData);
+		}
+		
+		userData.makeDebugTransactionsAvailable(session);
 	}
 
 	public void makeDebugTransactionsAvailable(HttpSession session) {

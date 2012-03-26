@@ -43,6 +43,8 @@ public class ItemEntity {
     	this.inflation = inflation;
     	this.recurrenceIsAutomatic = recurrenceIsAutomatic;
     	this.recurrenceManualInterval = recurrenceManualInterval;
+    	
+    	persist();
     }
     
     /**
