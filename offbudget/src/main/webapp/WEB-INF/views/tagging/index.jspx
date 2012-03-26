@@ -15,7 +15,6 @@
 				<th>Description</th>
 				<th>Amount</th>
 				<th />
-				<th />
 			</tr>
 			<c:forEach var="transaction" varStatus="transactionStatus"
 				items="${filteredtransactions}">
@@ -27,22 +26,11 @@
 					<td>
 						<form id="command" action="/offbudget/tagging/index" method="post">
 							<input type="hidden" name="method" value="REMOVE" /> <input
-								type="hidden" name="id" value="${transactionStatus.index}" /> <input
+								type="hidden" name="id" value="${transactionStatus.index}" />ID: ${transaction.id} <input
 								value="Remove Transaction" type="image"
 								title="Remove Transaction"
 								src="/offbudget/resources/images/delete.png" class="image"
 								alt="Remove transaction from selection" />
-						</form>
-					</td>
-					<td>
-						<form id="command" action="/offbudget/tagging/index" method="post">
-							<input type="hidden" name="method" value="DELETE" /> <input
-								type="hidden" name="id" value="${transactionStatus.index}" /> <input
-								onclick="return confirm('Are you sure want to delete this transaction from offBudget?');"
-								value="Delete Transaction" type="image"
-								title="Delete transaction"
-								src="/offbudget/resources/images/delete.png" class="image"
-								alt="Delete Transaction" />
 						</form>
 					</td>
 				</tr>

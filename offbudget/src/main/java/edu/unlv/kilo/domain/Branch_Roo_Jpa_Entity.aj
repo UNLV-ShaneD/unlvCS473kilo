@@ -3,7 +3,7 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.TransactionDescription;
+import edu.unlv.kilo.domain.Branch;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,36 +11,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-privileged aspect TransactionDescription_Roo_Jpa_Entity {
+privileged aspect Branch_Roo_Jpa_Entity {
     
-    declare @type: TransactionDescription: @Entity;
+    declare @type: Branch: @Entity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long TransactionDescription.id;
+    private Long Branch.id;
     
     @Version
     @Column(name = "version")
-    private Integer TransactionDescription.version;
+    private Integer Branch.version;
     
-    public TransactionDescription.new() {
+    public Branch.new() {
         super();
     }
 
-    public Long TransactionDescription.getId() {
+    public Long Branch.getId() {
         return this.id;
     }
     
-    public void TransactionDescription.setId(Long id) {
+    public void Branch.setId(Long id) {
         this.id = id;
     }
     
-    public Integer TransactionDescription.getVersion() {
+    public Integer Branch.getVersion() {
         return this.version;
     }
     
-    public void TransactionDescription.setVersion(Integer version) {
+    public void Branch.setVersion(Integer version) {
         this.version = version;
     }
     

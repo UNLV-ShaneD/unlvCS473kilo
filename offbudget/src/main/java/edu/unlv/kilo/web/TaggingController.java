@@ -24,7 +24,7 @@ import edu.unlv.kilo.domain.TransactionEntity;
 @Controller
 /**
  * Sorts transactions into items
- * Not safe with concurrent operations on the same user's data
+ * Not safe with concurrent multi-actor operations on the same user's data
  * @author Shane
  *
  */
@@ -44,38 +44,25 @@ public class TaggingController {
 
 		Calendar calendar = Calendar.getInstance();
 		{
-			TransactionEntity transaction = new TransactionEntity();
-			transaction.setAmount(new MoneyValue(300));
 			calendar.set(2012, 03, 01);
-			transaction.setTimeof(calendar.getTime());
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Test transaction A");
-			transaction.setDescription(desc);
+			TransactionDescription desc = new TransactionDescription("Test transaction A", "");
+			TransactionEntity transaction = new TransactionEntity(true, new MoneyValue(300), calendar.getTime(), desc);
 			
 			transactions.add(transaction);
 		}
 		
 		{
-			TransactionEntity transaction = new TransactionEntity();
-			transaction.setAmount(new MoneyValue(300));
 			calendar.set(2012, 03, 02);
-			transaction.setTimeof(calendar.getTime());
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Test transaction B");
-			transaction.setDescription(desc);
+			TransactionDescription desc = new TransactionDescription("Test transaction B", "");
+			TransactionEntity transaction = new TransactionEntity(true, new MoneyValue(300), calendar.getTime(), desc);
 			
 			transactions.add(transaction);
 		};
 		
 		{
-			TransactionEntity transaction = new TransactionEntity();
-			transaction.setAmount(new MoneyValue(300));
 			calendar.set(2012, 03, 05);
-			transaction.setTimeof(calendar.getTime());
-			
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Rest tiontracsan sigma");
-			transaction.setDescription(desc);
+			TransactionDescription desc = new TransactionDescription("Rest tiontracsan sigma", "");
+			TransactionEntity transaction = new TransactionEntity(true, new MoneyValue(300), calendar.getTime(), desc);
 			
 			transactions.add(transaction);
 		};
@@ -292,3 +279,26 @@ public class TaggingController {
 //		action.execute(transaction);
 //	}
 }
+
+
+
+
+
+
+
+
+/*
+Removed from index.jspx:
+					<td>
+						<form id="command" action="/offbudget/tagging/index" method="post">
+							<input type="hidden" name="method" value="DELETE" /> <input
+								type="hidden" name="id" value="${transactionStatus.index}" /> <input
+								onclick="return confirm('Are you sure want to delete this transaction from offBudget?');"
+								value="Delete Transaction" type="image"
+								title="Delete transaction"
+								src="/offbudget/resources/images/delete.png" class="image"
+								alt="Delete Transaction" />
+						</form>
+					</td>
+ */
+

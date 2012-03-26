@@ -16,33 +16,46 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord
 public class TransactionEntity {
-	
+
 	private boolean recurring;
 
-    @ManyToOne
-    private MoneyValue amount;
+	@ManyToOne
+	private MoneyValue amount;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date timeof;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "M-")
+	private Date timeof;
 
-    @ManyToOne
-    private TransactionDescription description;
-    
-    /**
-     * Returns the timeof in user-readable format
-     * @return
-     */
-    public String getPrettyTimeof() {
-    	SimpleDateFormat format = new SimpleDateFormat("yyyy' 'MMM' 'd");
-    	return format.format(timeof);
-    }
+	@ManyToOne
+	private TransactionDescription description;
 
-    /**
-     * Checks if the description contains a substring
-     * @param query substring to search for
-     * @return
-     */
+	public TransactionEntity(boolean recurring, MoneyValue amount, Date timeof,
+			TransactionDescription description) {
+		this.recurring = recurring;
+		this.amount = amount;
+		this.timeof = timeof;
+		this.description = description;
+		
+		persist();
+	}
+
+	/**
+	 * Returns the timeof in user-readable format
+	 * 
+	 * @return
+	 */
+	public String getPrettyTimeof() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy' 'MMM' 'd");
+		return format.format(timeof);
+	}
+
+	/**
+	 * Checks if the description contains a substring
+	 * 
+	 * @param query
+	 *            substring to search for
+	 * @return
+	 */
 	public boolean descriptionHasSubstring(String query) {
 		return description.descriptionHasSubstring(query);
 	}

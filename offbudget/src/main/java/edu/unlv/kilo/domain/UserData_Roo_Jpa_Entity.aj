@@ -3,7 +3,7 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.TransactionDescription;
+import edu.unlv.kilo.domain.UserData;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,36 +11,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-privileged aspect TransactionDescription_Roo_Jpa_Entity {
+privileged aspect UserData_Roo_Jpa_Entity {
     
-    declare @type: TransactionDescription: @Entity;
+    declare @type: UserData: @Entity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long TransactionDescription.id;
+    private Long UserData.id;
     
     @Version
     @Column(name = "version")
-    private Integer TransactionDescription.version;
+    private Integer UserData.version;
     
-    public TransactionDescription.new() {
-        super();
-    }
-
-    public Long TransactionDescription.getId() {
+    public Long UserData.getId() {
         return this.id;
     }
     
-    public void TransactionDescription.setId(Long id) {
+    public void UserData.setId(Long id) {
         this.id = id;
     }
     
-    public Integer TransactionDescription.getVersion() {
+    public Integer UserData.getVersion() {
         return this.version;
     }
     
-    public void TransactionDescription.setVersion(Integer version) {
+    public void UserData.setVersion(Integer version) {
         this.version = version;
     }
     
