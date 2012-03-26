@@ -3,13 +3,13 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.Branch;
+import edu.unlv.kilo.domain.BudgetBranch;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect Branch_Roo_ToString {
+privileged aspect BudgetBranch_Roo_ToString {
     
-    public String Branch.toString() {
+    public String BudgetBranch.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     

@@ -3,7 +3,7 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.Branch;
+import edu.unlv.kilo.domain.BudgetBranch;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,36 +11,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-privileged aspect Branch_Roo_Jpa_Entity {
+privileged aspect BudgetBranch_Roo_Jpa_Entity {
     
-    declare @type: Branch: @Entity;
+    declare @type: BudgetBranch: @Entity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long Branch.id;
+    private Long BudgetBranch.id;
     
     @Version
     @Column(name = "version")
-    private Integer Branch.version;
+    private Integer BudgetBranch.version;
     
-    public Branch.new() {
+    public BudgetBranch.new() {
         super();
     }
 
-    public Long Branch.getId() {
+    public Long BudgetBranch.getId() {
         return this.id;
     }
     
-    public void Branch.setId(Long id) {
+    public void BudgetBranch.setId(Long id) {
         this.id = id;
     }
     
-    public Integer Branch.getVersion() {
+    public Integer BudgetBranch.getVersion() {
         return this.version;
     }
     
-    public void Branch.setVersion(Integer version) {
+    public void BudgetBranch.setVersion(Integer version) {
         this.version = version;
     }
     

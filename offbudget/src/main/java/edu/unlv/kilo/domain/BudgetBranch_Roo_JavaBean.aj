@@ -3,24 +3,24 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.Branch;
+import edu.unlv.kilo.domain.BudgetBranch;
 import java.util.Set;
 
-privileged aspect Branch_Roo_JavaBean {
+privileged aspect BudgetBranch_Roo_JavaBean {
     
-    public String Branch.getDescription() {
+    public String BudgetBranch.getDescription() {
         return this.description;
     }
     
-    public void Branch.setDescription(String description) {
+    public void BudgetBranch.setDescription(String description) {
         this.description = description;
     }
     
-    public Set<Branch> Branch.getSubbranches() {
+    public Set<BudgetBranch> BudgetBranch.getSubbranches() {
         return this.subbranches;
     }
     
-    public void Branch.setSubbranches(Set<Branch> subbranches) {
+    public void BudgetBranch.setSubbranches(Set<BudgetBranch> subbranches) {
         this.subbranches = subbranches;
     }
     

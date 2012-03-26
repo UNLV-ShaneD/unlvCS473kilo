@@ -1,6 +1,8 @@
 package edu.unlv.kilo.domain;
 
 import java.util.Date;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +26,9 @@ public class ItemAdjustment {
      * The first date for which this adjustment should be taken into account
      */
     private Date effectiveDate;
+    
+    @ManyToOne
+    BudgetBranch branch = null;
 
 	/**
 	 * Calculates the new interval between the last transaction and the next projected transaction

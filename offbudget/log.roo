@@ -77,3 +77,4 @@ field boolean --class ~.domain.ItemEntity --fieldName inflation
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-25 10:17:45
 entity jpa --class ~.domain.Branch
 field set --fieldName subbranches --type ~.domain.Branch 
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-26 07:22:11

@@ -3,73 +3,73 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.Branch;
+import edu.unlv.kilo.domain.BudgetBranch;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect Branch_Roo_Jpa_ActiveRecord {
+privileged aspect BudgetBranch_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
-    transient EntityManager Branch.entityManager;
+    transient EntityManager BudgetBranch.entityManager;
     
-    public static final EntityManager Branch.entityManager() {
-        EntityManager em = new Branch().entityManager;
+    public static final EntityManager BudgetBranch.entityManager() {
+        EntityManager em = new BudgetBranch().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
     
-    public static long Branch.countBranches() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Branch o", Long.class).getSingleResult();
+    public static long BudgetBranch.countBudgetBranches() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM BudgetBranch o", Long.class).getSingleResult();
     }
     
-    public static List<Branch> Branch.findAllBranches() {
-        return entityManager().createQuery("SELECT o FROM Branch o", Branch.class).getResultList();
+    public static List<BudgetBranch> BudgetBranch.findAllBudgetBranches() {
+        return entityManager().createQuery("SELECT o FROM BudgetBranch o", BudgetBranch.class).getResultList();
     }
     
-    public static Branch Branch.findBranch(Long id) {
+    public static BudgetBranch BudgetBranch.findBudgetBranch(Long id) {
         if (id == null) return null;
-        return entityManager().find(Branch.class, id);
+        return entityManager().find(BudgetBranch.class, id);
     }
     
-    public static List<Branch> Branch.findBranchEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Branch o", Branch.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<BudgetBranch> BudgetBranch.findBudgetBranchEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM BudgetBranch o", BudgetBranch.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional
-    public void Branch.persist() {
+    public void BudgetBranch.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
     @Transactional
-    public void Branch.remove() {
+    public void BudgetBranch.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            Branch attached = Branch.findBranch(this.id);
+            BudgetBranch attached = BudgetBranch.findBudgetBranch(this.id);
             this.entityManager.remove(attached);
         }
     }
     
     @Transactional
-    public void Branch.flush() {
+    public void BudgetBranch.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
     @Transactional
-    public void Branch.clear() {
+    public void BudgetBranch.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
     @Transactional
-    public Branch Branch.merge() {
+    public BudgetBranch BudgetBranch.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        Branch merged = this.entityManager.merge(this);
+        BudgetBranch merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }

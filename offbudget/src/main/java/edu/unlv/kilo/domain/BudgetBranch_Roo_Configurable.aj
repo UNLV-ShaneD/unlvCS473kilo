@@ -3,11 +3,11 @@
 
 package edu.unlv.kilo.domain;
 
-import edu.unlv.kilo.domain.Branch;
+import edu.unlv.kilo.domain.BudgetBranch;
 import org.springframework.beans.factory.annotation.Configurable;
 
-privileged aspect Branch_Roo_Configurable {
+privileged aspect BudgetBranch_Roo_Configurable {
     
-    declare @type: Branch: @Configurable;
+    declare @type: BudgetBranch: @Configurable;
     
 }
