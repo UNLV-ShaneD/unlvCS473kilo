@@ -7,12 +7,18 @@ import java.util.Map;
 
 import edu.unlv.kilo.domain.TransactionEntity;
 
+/**
+ * Used to translate string representations of commands into an enumeration for O(log(n)) command lookups
+ * @author Shane
+ *
+ */
 public enum TaggingAction {
 	REMOVE("REMOVE"),
 	DELETE("DELETE"),
 	FILTER("FILTER"),
 	REMOVEFILTER("REMOVEFILTER"),
 	ITEMCREATE("ITEMCREATE"),
+	ITEMUSE("ITEMUSE"),
 	REMOVEALLFILTERS("REMOVEALLFILTERS");
 	
 	TaggingAction(String textCommand) {
