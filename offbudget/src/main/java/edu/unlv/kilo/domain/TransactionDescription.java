@@ -19,6 +19,12 @@ public class TransactionDescription {
 	private String description;
 
     private String comment;
+    
+    public TransactionDescription(String description, String comment) {
+    	this.description = description;
+    	this.comment = comment;
+    	persist();
+    }
 
     /**
      * Checks if description has a substring

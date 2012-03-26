@@ -26,12 +26,36 @@ privileged aspect ItemEntity_Roo_JavaBean {
         this.adjustments = adjustments;
     }
     
-    public Boolean ItemEntity.getInflation() {
+    public String ItemEntity.getDescription() {
+        return this.description;
+    }
+    
+    public void ItemEntity.setDescription(String description) {
+        this.description = description;
+    }
+    
+    public boolean ItemEntity.isInflation() {
         return this.inflation;
     }
     
-    public void ItemEntity.setInflation(Boolean inflation) {
+    public void ItemEntity.setInflation(boolean inflation) {
         this.inflation = inflation;
+    }
+    
+    public boolean ItemEntity.isRecurrenceIsAutomatic() {
+        return this.recurrenceIsAutomatic;
+    }
+    
+    public void ItemEntity.setRecurrenceIsAutomatic(boolean recurrenceIsAutomatic) {
+        this.recurrenceIsAutomatic = recurrenceIsAutomatic;
+    }
+    
+    public int ItemEntity.getRecurrenceManualInterval() {
+        return this.recurrenceManualInterval;
+    }
+    
+    public void ItemEntity.setRecurrenceManualInterval(int recurrenceManualInterval) {
+        this.recurrenceManualInterval = recurrenceManualInterval;
     }
     
 }

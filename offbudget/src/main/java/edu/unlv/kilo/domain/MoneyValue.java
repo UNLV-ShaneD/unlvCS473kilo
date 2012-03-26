@@ -14,24 +14,27 @@ public class MoneyValue {
 
 	/**
 	 * Construct a MoneyValue from an amount in cents
+	 * 
 	 * @param cents
 	 */
-    public MoneyValue(long cents) {
-    	this.amount = cents;
+	public MoneyValue(long cents) {
+		this.amount = cents;
+		persist();
 	}
 
 	private static final long serialVersionUID = 1L;
 	private long amount;
-	
+
 	/**
-	 * Returns a friendly-formatted string of the value
-	 * ex: $1.23
+	 * Returns a friendly-formatted string of the value ex: $1.23
+	 * 
 	 * @return Value in user-readable format
 	 */
 	@Bean
 	public String getPrintable() {
-		java.text.DecimalFormat format = new java.text.DecimalFormat("$0.00;($0.00)");
+		java.text.DecimalFormat format = new java.text.DecimalFormat(
+				"$0.00;($0.00)");
 
-		return format.format(((double)amount)/100.0);
+		return format.format(((double) amount) / 100.0);
 	}
 }

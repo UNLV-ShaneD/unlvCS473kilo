@@ -22,7 +22,15 @@ import edu.unlv.kilo.domain.TransactionEntity;
 
 @RequestMapping("/tagging/**")
 @Controller
+/**
+ * Sorts transactions into items
+ * Not safe with concurrent multi-actor operations on the same user's data
+ * @author Shane
+ *
+ */
 public class TaggingController {
+	
+	// This transactions list is independent of the user transaction list - this way, we can filter only transactions that come from a scrape
 	List<TransactionEntity> transactions = new ArrayList<TransactionEntity>();
 	List<ItemEntity> items = new ArrayList<ItemEntity>();
 	List<MonetaryTransactionFilter> filters = new ArrayList<MonetaryTransactionFilter>();
@@ -36,52 +44,39 @@ public class TaggingController {
 
 		Calendar calendar = Calendar.getInstance();
 		{
-			TransactionEntity transaction = new TransactionEntity();
-			transaction.setAmount(new MoneyValue(300));
 			calendar.set(2012, 03, 01);
-			transaction.setTimeof(calendar.getTime());
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Test transaction A");
-			transaction.setDescription(desc);
+			TransactionDescription desc = new TransactionDescription("Test transaction A", "");
+			TransactionEntity transaction = new TransactionEntity(true, new MoneyValue(300), calendar.getTime(), desc);
 			
 			transactions.add(transaction);
 		}
 		
 		{
-			TransactionEntity transaction = new TransactionEntity();
-			transaction.setAmount(new MoneyValue(300));
 			calendar.set(2012, 03, 02);
-			transaction.setTimeof(calendar.getTime());
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Test transaction B");
-			transaction.setDescription(desc);
+			TransactionDescription desc = new TransactionDescription("Test transaction B", "");
+			TransactionEntity transaction = new TransactionEntity(true, new MoneyValue(300), calendar.getTime(), desc);
 			
 			transactions.add(transaction);
 		};
 		
 		{
-			TransactionEntity transaction = new TransactionEntity();
-			transaction.setAmount(new MoneyValue(300));
 			calendar.set(2012, 03, 05);
-			transaction.setTimeof(calendar.getTime());
-			
-			TransactionDescription desc = new TransactionDescription();
-			desc.setDescription("Rest tiontracsan sigma");
-			transaction.setDescription(desc);
+			TransactionDescription desc = new TransactionDescription("Rest tiontracsan sigma", "");
+			TransactionEntity transaction = new TransactionEntity(true, new MoneyValue(300), calendar.getTime(), desc);
 			
 			transactions.add(transaction);
 		};
 		
 		try {
 			MonetaryTransactionFilterDescription filter = new MonetaryTransactionFilterDescription("sigma", true);
-//			filters.add(filter);
+			filters.add(filter);
 		} catch (Exception e) {
 			// Do nothing
 		}
 	}
 	
 	public void actionDelete(int index) {
-		TransactionEntity transaction = transactions.get(index);
+//		TransactionEntity transaction = transactions.get(index);
 	}
 	
 	public void actionRemove(int index) {
@@ -105,7 +100,68 @@ public class TaggingController {
 		filters.clear();
 	}
 	
-	public void actionItemCreate(String itemDescription) {
+	/**
+	 * Find if any of the selected transactions are associated with an item already - if so, remove them from that item
+	 * @param transactions
+	 */
+	private void unitemizeTransactions(List<TransactionEntity> transactions) {
+		for (ItemEntity loopItem : items) {
+			loopItem.removeTransactions(transactions);
+		}
+	}
+	
+	/**
+	 * Create an item from the active selection of transactions, then clear the current filter set
+	 * 
+	 * @param itemDescription
+	 * @param itemInflation
+	 * @param itemRecurrenceAutomatic
+	 * @param itemRecurrenceInterval
+	 */
+	public void actionItemCreate(String itemDescription, boolean itemInflation, boolean itemRecurrenceAutomatic, int itemRecurrenceInterval) {
+		ItemEntity item = new ItemEntity(itemDescription, itemInflation, itemRecurrenceAutomatic, itemRecurrenceInterval);
+		
+		// Filter the transactions
+		List<TransactionEntity> filteredTransactions = new LinkedList<TransactionEntity>();
+		List<TransactionEntity> antifilteredTransactions = new LinkedList<TransactionEntity>();
+		filterTransactions(filteredTransactions, antifilteredTransactions);
+		
+		unitemizeTransactions(filteredTransactions);
+		
+		// Remove filtered transactions from transaction pool
+		transactions.removeAll(filteredTransactions);
+		
+		// Add selected transactions to the new item
+		item.addTransactions(filteredTransactions);
+		
+		// Save our new item
+		items.add(item);
+		
+		// Now clear active filters
+		actionRemoveAllFilters();
+	}
+	
+	/**
+	 * Use an existing item to add the active selection of transactions to, then clear the current filter set
+	 * @param item
+	 */
+	private void actionItemUse(ItemEntity item) {
+		
+		// Filter the transactions
+		List<TransactionEntity> filteredTransactions = new LinkedList<TransactionEntity>();
+		List<TransactionEntity> antifilteredTransactions = new LinkedList<TransactionEntity>();
+		filterTransactions(filteredTransactions, antifilteredTransactions);
+		
+		unitemizeTransactions(filteredTransactions);
+		
+		// Remove filtered transactions from transaction pool
+		transactions.removeAll(filteredTransactions);
+		
+		// Add selected transactions to the item
+		item.addTransactions(filteredTransactions);
+
+		// Now clear active filters
+		actionRemoveAllFilters();
 	}
 
 	@RequestMapping
@@ -142,13 +198,36 @@ public class TaggingController {
 				break;
 			case REMOVEALLFILTERS:
 				actionRemoveAllFilters();
+				break;
 			case ITEMCREATE:
-				String itemDescription = request.getParameter("itemDescription");
+				String itemDescription = request.getParameter("newitemDescription");
+				boolean itemInflation = request.getParameter("newitemInflation") == null;
+				String itemRecurrenceAutomaticString = request.getParameter("newitemRecurrence");
+				boolean itemRecurrenceAutomatic = itemRecurrenceAutomaticString.compareTo("automatic") == 0;
+				String itemRecurrenceIntervalString = request.getParameter("newitemRecurrenceInterval");
+				int itemRecurrenceInterval = 0;
+				if (!itemRecurrenceAutomatic) {
+					itemRecurrenceInterval = Integer.parseInt(itemRecurrenceIntervalString);
+				}
 				if (itemDescription.length() == 0)
 				{
 					break;
 				}
-				actionItemCreate(itemDescription);
+				if (!itemRecurrenceAutomatic && itemRecurrenceInterval <= 0)
+				{
+					break;
+				}
+				actionItemCreate(itemDescription, itemInflation, itemRecurrenceAutomatic, itemRecurrenceInterval);
+				break;
+			case ITEMUSE:
+				String itemIndexString = request.getParameter("useitemDescription");
+				int itemIndex = Integer.parseInt(itemIndexString);
+				
+				ItemEntity item = items.get(itemIndex);
+				
+				actionItemUse(item);
+				
+				break;
 			}
 			
 //			action.execute(this);
@@ -161,6 +240,7 @@ public class TaggingController {
 		// Build model
 		modelMap.addAttribute("transactions", transactions);
 		modelMap.addAttribute("filters", filters);
+		modelMap.addAttribute("items", items);
 
 		// Filter transactions
 		List<TransactionEntity> filteredTransactions = new LinkedList<TransactionEntity>();
@@ -171,7 +251,7 @@ public class TaggingController {
 		
 		return "tagging/index";
 	}
-	
+
 	private void filterTransactions(List<TransactionEntity> filteredTransactions, List<TransactionEntity> antifilteredTransactions) {
 		for (TransactionEntity transaction : transactions) {
 			boolean pass = true;
@@ -199,3 +279,26 @@ public class TaggingController {
 //		action.execute(transaction);
 //	}
 }
+
+
+
+
+
+
+
+
+/*
+Removed from index.jspx:
+					<td>
+						<form id="command" action="/offbudget/tagging/index" method="post">
+							<input type="hidden" name="method" value="DELETE" /> <input
+								type="hidden" name="id" value="${transactionStatus.index}" /> <input
+								onclick="return confirm('Are you sure want to delete this transaction from offBudget?');"
+								value="Delete Transaction" type="image"
+								title="Delete transaction"
+								src="/offbudget/resources/images/delete.png" class="image"
+								alt="Delete Transaction" />
+						</form>
+					</td>
+ */
+

@@ -15,7 +15,6 @@
 				<th>Description</th>
 				<th>Amount</th>
 				<th />
-				<th />
 			</tr>
 			<c:forEach var="transaction" varStatus="transactionStatus"
 				items="${filteredtransactions}">
@@ -27,22 +26,11 @@
 					<td>
 						<form id="command" action="/offbudget/tagging/index" method="post">
 							<input type="hidden" name="method" value="REMOVE" /> <input
-								type="hidden" name="id" value="${transactionStatus.index}" /> <input
+								type="hidden" name="id" value="${transactionStatus.index}" />ID: ${transaction.id} <input
 								value="Remove Transaction" type="image"
 								title="Remove Transaction"
 								src="/offbudget/resources/images/delete.png" class="image"
 								alt="Remove transaction from selection" />
-						</form>
-					</td>
-					<td>
-						<form id="command" action="/offbudget/tagging/index" method="post">
-							<input type="hidden" name="method" value="DELETE" /> <input
-								type="hidden" name="id" value="${transactionStatus.index}" /> <input
-								onclick="return confirm('Are you sure want to delete this transaction from offBudget?');"
-								value="Delete Transaction" type="image"
-								title="Delete transaction"
-								src="/offbudget/resources/images/delete.png" class="image"
-								alt="Delete Transaction" />
 						</form>
 					</td>
 				</tr>
@@ -93,23 +81,54 @@
 				<form action="/offbudget/tagging/index" method="post">
 					<div>
 						<input type="hidden" name="method" value="ITEMCREATE" /> <input
-							type="hidden" name="id" value="0" /> <label for="itemdescription">Item description
-							: </label> <input id="itemdescription" name="itemDescription" value="" type="text" />
+							type="hidden" name="id" value="0" /> <label
+							for="newitemdescription">Item description : </label> <input
+							id="newitemdescription" name="newitemDescription" value=""
+							type="text" />
 					</div>
 					<br />
 					<div>
-						<label for="filterExclusive">Affected by inflation : </label> <input
-							id="filterExclusive" name="newitemInflation" type="checkbox" />
+						<label for="newitemInflation">Affected by inflation : </label> <input
+							id="newitemInflation" name="newitemInflation" type="checkbox" />
 					</div>
 					<br />
 					<div>
-						<input type="submit" value="Add filter" />
+						Recurrence:
+						<div id="newitemRecurrenceBox">
+							<input type="radio" name="newitemRecurrence"
+								id="newitemRecurrenceIntervalAutomatic" value="automatic"
+								checked="checked" />Automatic <br /> <input type="radio"
+								name="newitemRecurrence" id="newitemRecurrenceIntervalManual"
+								value="manual" />Fixed interval between transactions : <input
+								id="newitemRecurrenceInterval" name="newitemRecurrenceInterval"
+								value="" type="text"
+								onclick="document.getElementById('newitemRecurrenceIntervalManual').checked = true;" />
+						</div>
+					</div>
+					<br />
+					<div>
+						<input type="submit" value="Create item" />
 					</div>
 				</form>
 			</div>
 		</util:panel>
 		<util:panel openPane="false" id="itemExisting"
 			title="Use existing item">
+			<form action="/offbudget/tagging/index" method="post">
+				<div>
+					<input type="hidden" name="method" value="ITEMUSE" /> <label for="useitemdescription">Item : </label> <input
+						type="hidden" name="id" value="0" /> <select
+						id="useitemdescription" name="useitemDescription">
+						<c:forEach var="item" varStatus="itemStatus" items="${items}">
+							<option value="${itemStatus.index}">${item.description}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<br />
+				<div>
+					<input type="submit" value="Itemize" />
+				</div>
+			</form>
 		</util:panel>
 	</util:panel>
 </div>
