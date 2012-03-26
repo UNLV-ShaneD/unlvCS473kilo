@@ -11,11 +11,11 @@ import java.util.List;
 privileged aspect UserData_Roo_JavaBean {
     
     public List<TransactionEntity> UserData.getTransactions() {
-        return this.transactions;
+        return this.pendingTransactions;
     }
     
     public void UserData.setTransactions(List<TransactionEntity> transactions) {
-        this.transactions = transactions;
+        this.pendingTransactions = transactions;
     }
     
     public List<ItemEntity> UserData.getItems() {

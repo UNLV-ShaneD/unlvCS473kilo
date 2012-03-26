@@ -138,15 +138,7 @@ public class TaggingController {
 		}
 
 		// Build model
-		userData.buildTaggingModel(modelMap);
-		modelMap.addAttribute("filters", filters);
-
-		// Filter transactions
-		List<TransactionEntity> filteredTransactions = new LinkedList<TransactionEntity>();
-		List<TransactionEntity> antifilteredTransactions = new LinkedList<TransactionEntity>();
-		userData.filterTransactions(filteredTransactions, antifilteredTransactions, filters);
-		modelMap.addAttribute("filteredtransactions", filteredTransactions);
-		modelMap.addAttribute("antifilteredtransactions", antifilteredTransactions);
+		userData.buildTaggingModel(modelMap, filters);
 		
 		return "tagging/index";
 	}

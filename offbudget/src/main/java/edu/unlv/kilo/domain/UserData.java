@@ -22,11 +22,11 @@ import edu.unlv.kilo.web.MonetaryTransactionFilterDescription;
 @RooJpaActiveRecord
 public class UserData {
 	@ManyToMany(cascade = CascadeType.ALL)
-	List<TransactionEntity> transactionsX = new ArrayList<TransactionEntity>();
+	List<TransactionEntity> transactions = new ArrayList<TransactionEntity>();
 	@ManyToMany(cascade = CascadeType.ALL)
 	List<ItemEntity> items = new ArrayList<ItemEntity>();
 	@ManyToMany(cascade = CascadeType.ALL)
-	List<TransactionEntity> transactions = new ArrayList<TransactionEntity>();
+	List<TransactionEntity> pendingTransactions = new ArrayList<TransactionEntity>();
 
 	public UserData() {
 //		persist();
@@ -40,9 +40,17 @@ public class UserData {
 		session.setAttribute("UserData", userData);
 	}
 
-	public void buildTaggingModel(ModelMap modelMap) {
-		modelMap.addAttribute("transactions", transactions);
+	public void buildTaggingModel(ModelMap modelMap, List<MonetaryTransactionFilter> filters) {
+		modelMap.addAttribute("transactions", pendingTransactions);
 		modelMap.addAttribute("items", items);
+
+		// Filter transactions
+		List<TransactionEntity> filteredTransactions = new LinkedList<TransactionEntity>();
+		List<TransactionEntity> antifilteredTransactions = new LinkedList<TransactionEntity>();
+		filterTransactions(filteredTransactions, antifilteredTransactions, filters);
+		modelMap.addAttribute("filteredtransactions", filteredTransactions);
+		modelMap.addAttribute("antifilteredtransactions", antifilteredTransactions);
+		modelMap.addAttribute("filters", filters);
 	}
 
 	private void addDummyTransactionsAndFilter(
@@ -83,10 +91,10 @@ public class UserData {
 	}
 
 	public void makeDebugTransactionsAvailable(HttpSession session) {
-		if (transactions.size() == 0) {
-			transactions = new ArrayList<TransactionEntity>();
-			addDummyTransactionsAndFilter(transactions);
-			session.setAttribute("transactions", transactions);
+		if (pendingTransactions.size() == 0) {
+			pendingTransactions = new ArrayList<TransactionEntity>();
+			addDummyTransactionsAndFilter(pendingTransactions);
+			session.setAttribute("transactions", pendingTransactions);
 		}
 	}
 
@@ -95,7 +103,7 @@ public class UserData {
 	}
 
 	public void transactionRemove(int index) {
-		transactions.remove(index);
+		pendingTransactions.remove(index);
 	}
 	
 	/**
@@ -109,7 +117,7 @@ public class UserData {
 	}
 
 	public void filterTransactions(List<TransactionEntity> filteredTransactions, List<TransactionEntity> antifilteredTransactions, List<MonetaryTransactionFilter> filters) {
-		for (TransactionEntity transaction : transactions) {
+		for (TransactionEntity transaction : pendingTransactions) {
 			boolean pass = true;
 			for (MonetaryTransactionFilter filter : filters) {
 				if (!filter.checkPasses(transaction)) {
@@ -125,15 +133,6 @@ public class UserData {
 			}
 		}
 	}
-	
-	public void removeFromPendingTransactions(List<TransactionEntity> transactions) {
-		this.transactions.removeAll(transactions);
-	}
-
-	public void saveItem(ItemEntity item) {
-		items.add(item);
-	}
-
 	
 	/**
 	 * Create an item from the active selection of transactions, then clear the current filter set
@@ -154,13 +153,13 @@ public class UserData {
 		unitemizeTransactions(filteredTransactions);
 		
 		// Remove filtered transactions from transaction pool
-		removeFromPendingTransactions(filteredTransactions);
+		pendingTransactions.removeAll(pendingTransactions);
 		
 		// Add selected transactions to the new item
 		item.addTransactions(filteredTransactions);
 		
 		// Save our new item
-		saveItem(item);
+		items.add(item);
 		
 		// Now clear active filters
 		filters.clear();
@@ -181,7 +180,7 @@ public class UserData {
 		unitemizeTransactions(filteredTransactions);
 		
 		// Remove filtered transactions from transaction pool
-		removeFromPendingTransactions(filteredTransactions);
+		pendingTransactions.removeAll(pendingTransactions);
 		
 		// Add selected transactions to the item
 		item.addTransactions(filteredTransactions);
