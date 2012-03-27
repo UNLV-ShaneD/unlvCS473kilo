@@ -20,7 +20,7 @@ public class TransactionEntity {
 	private boolean recurring;
 
 	@ManyToOne
-	private MoneyValue amount;
+	private MoneyValue value;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "M-")
@@ -32,7 +32,7 @@ public class TransactionEntity {
 	public TransactionEntity(boolean recurring, MoneyValue amount, Date timeof,
 			TransactionDescription description) {
 		this.recurring = recurring;
-		this.amount = amount;
+		this.value = amount;
 		this.timeof = timeof;
 		this.description = description;
 		

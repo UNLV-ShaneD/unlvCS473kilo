@@ -2,6 +2,7 @@ package edu.unlv.kilo.domain;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -62,7 +63,7 @@ public class ItemEntity {
      * @param transaction
      */
     public void addTransactions(List<TransactionEntity> transactions) {
-    	this.transactions.removeAll(transactions);
+    	this.transactions.addAll(transactions);
     }
     
     /**
@@ -121,5 +122,36 @@ public class ItemEntity {
     	Days days = Days.daysBetween(new DateTime(firstDate), new DateTime(lastDate));
     	
     	return days.getDays() / numberRecurringTransactions;
+    }
+    
+    /** Calculates and returns the base value of the item
+     * 
+     * @return The predicted value of the next transaction based on the average of recurring transactions in the item.
+     */
+    public MoneyValue getBaseValue(){
+    	MoneyValue baseValue = new MoneyValue();
+    	long recurrence_num = 0;
+    	Iterator<TransactionEntity> trans_it = transactions.iterator();
+    	
+    	while (trans_it.hasNext()){
+    		if (trans_it.next().isRecurring()){
+    			addMoneyValues(baseValue, trans_it.next().getValue());
+    			recurrence_num++;
+    		}
+    	}
+    	
+    	baseValue.setAmount(baseValue.getAmount() / recurrence_num);
+    	
+    	return baseValue;
+    }
+    
+    /** Adds together two MoneyValue objects. The parameter 'base' will have its value added to by the parameter 'add'.
+     * This means 'base' will have the sum of the two values set to its amount.
+     * 
+     * @param base The MoneyValue object to be added to.
+     * @param add The MoneyValue object to add with.
+     */
+    public void addMoneyValues(MoneyValue base, MoneyValue add){
+    	base.setAmount(base.getAmount() + add.getAmount());
     }
 }

@@ -18,12 +18,12 @@ privileged aspect TransactionEntity_Roo_JavaBean {
         this.recurring = recurring;
     }
     
-    public MoneyValue TransactionEntity.getAmount() {
-        return this.amount;
+    public MoneyValue TransactionEntity.getValue() {
+        return this.value;
     }
     
-    public void TransactionEntity.setAmount(MoneyValue amount) {
-        this.amount = amount;
+    public void TransactionEntity.setValue(MoneyValue value) {
+        this.value = value;
     }
     
     public Date TransactionEntity.getTimeof() {
