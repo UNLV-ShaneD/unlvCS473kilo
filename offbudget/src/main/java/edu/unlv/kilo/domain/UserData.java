@@ -168,13 +168,14 @@ public class UserData {
 		unitemizeTransactions(filteredTransactions);
 		
 		// Remove filtered transactions from transaction pool
-		pendingTransactions.removeAll(pendingTransactions);
+		pendingTransactions.removeAll(filteredTransactions);
 		
 		// Add selected transactions to the new item
 		item.addTransactions(filteredTransactions);
 		
 		// Save our new item
 		items.add(item);
+		item.persist();
 		
 		// Now clear active filters
 		filters.clear();
@@ -195,10 +196,11 @@ public class UserData {
 		unitemizeTransactions(filteredTransactions);
 		
 		// Remove filtered transactions from transaction pool
-		pendingTransactions.removeAll(pendingTransactions);
+		pendingTransactions.removeAll(filteredTransactions);
 		
 		// Add selected transactions to the item
 		item.addTransactions(filteredTransactions);
+		item.persist();
 
 		// Now clear active filters
 		filters.clear();

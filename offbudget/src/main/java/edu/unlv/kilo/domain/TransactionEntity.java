@@ -17,17 +17,17 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaActiveRecord
 public class TransactionEntity {
 
-	private boolean recurring;
+	private boolean recurring = false;
 
 	@ManyToOne
-	private MoneyValue amount;
+	private MoneyValue amount = null;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "M-")
-	private Date timeof;
+	private Date timeof = null;
 
 	@ManyToOne
-	private TransactionDescription description;
+	private TransactionDescription description = null;
 
 	public TransactionEntity(boolean recurring, MoneyValue amount, Date timeof,
 			TransactionDescription description) {
@@ -35,8 +35,6 @@ public class TransactionEntity {
 		this.amount = amount;
 		this.timeof = timeof;
 		this.description = description;
-		
-		persist();
 	}
 
 	/**

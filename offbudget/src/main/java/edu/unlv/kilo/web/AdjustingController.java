@@ -23,6 +23,9 @@ public class AdjustingController {
 		try {
 			long id = Long.parseLong(idString);
 			ItemEntity item = ItemEntity.findItemEntity(id);
+
+			modelMap.addAttribute("item", item);
+			modelMap.addAttribute("transactions", item.getTransactions());
 			
 	        return "adjusting/item";
 		} catch (NumberFormatException e) {

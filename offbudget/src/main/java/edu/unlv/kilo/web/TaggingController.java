@@ -89,7 +89,8 @@ public class TaggingController {
 				break;
 			case ITEMCREATE:
 				String itemDescription = request.getParameter("newitemDescription");
-				boolean itemInflation = request.getParameter("newitemInflation") == null;
+				String itemInflationString = request.getParameter("newitemInflation");
+				boolean itemInflation = (itemInflationString != null);
 				String itemRecurrenceAutomaticString = request.getParameter("newitemRecurrence");
 				boolean itemRecurrenceAutomatic = itemRecurrenceAutomaticString.compareTo("automatic") == 0;
 				String itemRecurrenceIntervalString = request.getParameter("newitemRecurrenceInterval");
