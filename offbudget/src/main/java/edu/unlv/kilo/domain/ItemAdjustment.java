@@ -62,8 +62,8 @@ public class ItemAdjustment {
 	 * @param nextAmount is the amount of the next projected transaction (after being adjusted by this adjustment's projectTransactionAmount method)
 	 * @return Whether or not this adjustment should be used in the next transaction projection
 	 */
-    public boolean determineRecurrence(int iterationNumber, Date nextDate, MoneyValue nextAmount) {
-        return false;
+    public boolean determineRecurrence(int iterationNumber, Calendar nextDate, MoneyValue nextAmount) {
+        return true;
     }
     
     /** Determines if this adjustment is still effective based on the date given.
