@@ -10,6 +10,8 @@
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
             <menu:item id="i_controller__taggingindex_id" messageCode="global_generic" url="/tagging/index" z="6CENgNay25eDFeG6ZP2gz3iX0eo="/>
             <menu:item id="i_controller__adjustingindex_id" messageCode="global_generic" url="/adjusting/index" z="h1zrvximiCRzNRWtBOPyu9Nxm/0="/>
-        </menu:category>
+			 <menu:item id="i_controller__chartingindex_id" messageCode="global_generic" url="/charting/index" z="ZTTUg+It71zm75UrvyUf2tFLJT8="/>
+            <menu:item id="i_controller__chartingformindex_id" messageCode="global_generic" url="/chartingform/index" z="/AhKA+1Um2EoVQV6efjTIpyihSo="/>
+		</menu:category>
     </menu:menu>
 </div>
