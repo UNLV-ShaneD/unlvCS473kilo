@@ -28,8 +28,8 @@
 				<div id="editRecurrenceBox">
 					<input type="radio" name="editRecurrence" id="editRecurrenceIntervalAutomatic" value="automatic" />Automatic
 					<br />
-					<input type="radio" name="editRecurrence" id="editRecurrenceIntervalManual" value="manual" />Fixed interval between transactions : 
-					<input id="editRecurrenceInterval" name="editRecurrenceInterval" value="${editRecurrenceInterval}" type="text" onclick="document.getElementById('editRecurrenceIntervalManual').checked = true;" />
+					<input type="radio" name="editRecurrence" id="editRecurrenceIntervalManual" value="manual" />Fixed interval between transactions (in days) : 
+					<input id="editRecurrenceInterval" name="editRecurrenceInterval" value="${item.baseRecurrenceInterval}" type="text" onclick="document.getElementById('editRecurrenceIntervalManual').checked = true;" />
 					<script type="text/javascript">
 						document.getElementById('editRecurrenceIntervalAutomatic').checked = ${item.recurrenceIsAutomatic};
 						document.getElementById('editRecurrenceIntervalManual').checked = !${item.recurrenceIsAutomatic};
@@ -42,6 +42,35 @@
 			</div>
 		</form>
 
+	</util:panel>
+	<util:panel id="transactions" title="Transactions">
+		<table>
+			<tr>
+				<th>Date</th>
+				<th>Description</th>
+				<th>Amount</th>
+				<th />
+			</tr>
+			<c:forEach var="transaction" items="${transactions}">
+				<tr>
+					<td>${transaction.prettyTimeof}</td>
+					<td>${transaction.description.description}</td>
+					<td>${transaction.amount.printable}</td>
+					<td>
+						<form id="command" action="item?id=${item.id}" method="post">
+							<input type="hidden" name="method" value="TOGGLERECURRING" />
+							<input
+								type="hidden" name="id" value="${transaction.id}" />
+							<input
+								value="Toggle Recurring" type="image"
+								title="Toggle Recurring"
+								src="/offbudget/resources/images/update.png" class="image"
+								alt="Toggle Recurring" />
+						</form>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</util:panel>
 	<util:panel id="adjust" title="Manage Adjustments">
 	</util:panel>

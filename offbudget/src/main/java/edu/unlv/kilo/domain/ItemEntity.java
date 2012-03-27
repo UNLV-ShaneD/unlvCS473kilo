@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javassist.expr.Instanceof;
+
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 
@@ -17,7 +19,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class ItemEntity {
+public class ItemEntity implements Comparable {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<TransactionEntity> transactions = new HashSet<TransactionEntity>();
@@ -64,7 +66,9 @@ public class ItemEntity {
      * @param transaction
      */
     public void addTransactions(List<TransactionEntity> transactions) {
-    	this.transactions.removeAll(transactions);
+    	for (TransactionEntity transaction : transactions) {
+    	}
+    	this.transactions.addAll(transactions);
     }
     
     /**
@@ -124,4 +128,14 @@ public class ItemEntity {
     	
     	return days.getDays() / numberRecurringTransactions;
     }
+
+	@Override
+	public int compareTo(Object o) {
+		if (o instanceof ItemEntity)
+		{
+			ItemEntity other = (ItemEntity)o;
+			return description.compareTo(other.description);
+		}
+		return -1;
+	}
 }

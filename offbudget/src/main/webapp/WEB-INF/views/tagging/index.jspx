@@ -99,7 +99,7 @@
 								id="newitemRecurrenceIntervalAutomatic" value="automatic"
 								checked="checked" />Automatic <br /> <input type="radio"
 								name="newitemRecurrence" id="newitemRecurrenceIntervalManual"
-								value="manual" />Fixed interval between transactions : <input
+								value="manual" />Fixed interval between transactions (in days) : <input
 								id="newitemRecurrenceInterval" name="newitemRecurrenceInterval"
 								value="" type="text"
 								onclick="document.getElementById('newitemRecurrenceIntervalManual').checked = true;" />

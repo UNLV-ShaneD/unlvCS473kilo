@@ -25,9 +25,7 @@ public class AdjustingController {
 			ItemEntity item = ItemEntity.findItemEntity(id);
 
 			modelMap.addAttribute("item", item);
-			modelMap.addAttribute("editInflationChecked", item.isInflation());
-			modelMap.addAttribute("editRecurrenceIntervalAutomaticChecked", item.isRecurrenceIsAutomatic());
-			modelMap.addAttribute("editRecurrenceInterval", item.getBaseRecurrenceInterval());
+			modelMap.addAttribute("transactions", item.getTransactions());
 			
 	        return "adjusting/item";
 		} catch (NumberFormatException e) {
