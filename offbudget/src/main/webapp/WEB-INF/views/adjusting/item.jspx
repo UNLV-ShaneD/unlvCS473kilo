@@ -7,14 +7,42 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message code="label_adjusting_index" htmlEscape="false"
 		var="title" />
-	<util:panel id="title" title="${title}">
-		<spring:message code="application_name" htmlEscape="false"
-			var="app_name" />
-		<h3>
-			<spring:message arguments="${app_name}" code="welcome_titlepane" />
-		</h3>
-		<br />
-		<h4>Add an item adjustment</h4>
-		
+	<util:panel id="modifyAttributes" title="Modify Item Attributes">
+		<form id="update" action="item?id=${item.id}" method="post">
+			<input type="hidden" name="method" value="REMOVEFILTER" />
+			<div>
+				<label for="editDescription">Item description : </label>
+				<input id="editDescription" name="editDescription" value="${item.description}" type="text" />
+			</div>
+			<br />
+			<div>
+				<label for="editInflation">Affected by inflation : </label>
+				<input id="editInflation" name="editInflation" type="checkbox" />
+				<script type="text/javascript">
+					document.getElementById('editInflation').checked = ${item.inflation};
+				</script>
+			</div>
+			<br />
+			<div>
+				Recurrence:
+				<div id="editRecurrenceBox">
+					<input type="radio" name="editRecurrence" id="editRecurrenceIntervalAutomatic" value="automatic" />Automatic
+					<br />
+					<input type="radio" name="editRecurrence" id="editRecurrenceIntervalManual" value="manual" />Fixed interval between transactions : 
+					<input id="editRecurrenceInterval" name="editRecurrenceInterval" value="${editRecurrenceInterval}" type="text" onclick="document.getElementById('editRecurrenceIntervalManual').checked = true;" />
+					<script type="text/javascript">
+						document.getElementById('editRecurrenceIntervalAutomatic').checked = ${item.recurrenceIsAutomatic};
+						document.getElementById('editRecurrenceIntervalManual').checked = !${item.recurrenceIsAutomatic};
+					</script>
+				</div>
+			</div>
+			<br />
+			<div>
+				<input type="submit" value="Save changes" />
+			</div>
+		</form>
+
+	</util:panel>
+	<util:panel id="adjust" title="Manage Adjustments">
 	</util:panel>
 </div>

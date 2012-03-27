@@ -15,9 +15,22 @@
 		</h3>
 		<br />
 		<h4>Adjust an item:</h4>
-		<c:forEach var="item" varStatus="itemStatus" items="${items}">
-		<a href="item?id=${item.id}">${item.description}</a><br />
-		</c:forEach>
-		
+		<table>
+			<tr>
+				<th>Description</th>
+				<th>Inflation</th>
+				<th>Interval</th>
+				<th />
+			</tr>
+			<c:forEach var="item" varStatus="itemStatus" items="${items}">
+				<tr>
+					<td><a href="item?id=${item.id}">${item.description}</a></td>
+					<td>${item.inflation}</td>
+					<td>${item.baseRecurrenceInterval} days</td>
+					<td><a href="item?id=${item.id}"><img src="http://localhost:8080/offbudget/resources/images/update.png" title="Modify Item" /></a></td>
+				</tr>
+			</c:forEach>
+		</table>
+
 	</util:panel>
 </div>
