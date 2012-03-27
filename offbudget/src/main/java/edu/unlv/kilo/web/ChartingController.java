@@ -25,6 +25,7 @@
 
 package edu.unlv.kilo.web;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +48,13 @@ import static com.googlecode.charts4j.Color.*;
 
 @RequestMapping("/charting/**")
 @Controller
+/**
+ * This controller gets the user's input, sends it off to Projecting
+ * which returns graph data to be plotted. A line chart is then produced
+ * and displayed on the screen.
+ * @author KiLLeR
+ *
+ */
 public class ChartingController 
 {
 
@@ -58,19 +66,29 @@ public class ChartingController
     	int interval = form.getDay_Interval();
     	// CALL DANE
     	
-    	Slice s1 = Slice.newSlice(interval, YELLOW, "Ms. Pac-Man");         
+    	
+    	//SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    	//String xxx = null;
+    	
+    	/*if (startDate != null) {
+    	xxx = sdf.format(startDate.getTime());
+    	} */
+    	//String xxx = startDate.toString();
+    	
+    	/*Slice s1 = Slice.newSlice(interval, YELLOW, "Ms. Pac-Man");         
     	Slice s2 = Slice.newSlice(100 - interval, RED, "Red Lips");          
     	PieChart chart = GCharts.newPieChart(s1, s2);         
-    	chart.setTitle("2D Pie Chart", BLACK, 16);         
+    	chart.setTitle(xxx, BLACK, 16);         
     	chart.setSize(500, 200);         
-    	String url = chart.toURLString(); 
+    	String url = chart.toURLString(); */
     	
     	//Your really great chart.
         //final Plot plot = Plots.newPlot(Data.newData(0, 66.6, 33.3, 100));
         //final LineChart chart = GCharts.newLineChart(plot);
         //chart.setTitle("My Really Great Chart");
         //Passing the chart to the JSP for rendering.
-        model.addAttribute("url", chart.toURLString()); 
+        
+    	//model.addAttribute("url", chart.toURLString()); 
     	
     	return "charting/graph";
     }
