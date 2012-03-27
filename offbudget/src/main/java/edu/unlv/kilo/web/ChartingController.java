@@ -53,13 +53,13 @@ public class ChartingController
     @RequestMapping(method = RequestMethod.POST)
     public String post(@Valid ChartingForm form, BindingResult result, Model model, HttpServletRequest request) 
     {
-    	//Calendar startDate = form.getStartDate();
-    	//Calendar endDate = form.getEndDate();
+    	Calendar startDate = form.getStartDate();
+    	Calendar endDate = form.getEndDate();
     	int interval = form.getDay_Interval();
     	// CALL DANE
     	
-    	Slice s1 = Slice.newSlice(90, YELLOW, "Ms. Pac-Man");         
-    	Slice s2 = Slice.newSlice(10, RED, "Red Lips");          
+    	Slice s1 = Slice.newSlice(interval, YELLOW, "Ms. Pac-Man");         
+    	Slice s2 = Slice.newSlice(100 - interval, RED, "Red Lips");          
     	PieChart chart = GCharts.newPieChart(s1, s2);         
     	chart.setTitle("2D Pie Chart", BLACK, 16);         
     	chart.setSize(500, 200);         

@@ -22,7 +22,7 @@ public class ChartingForm
 	private Calendar endDate;
 	
 	@NotNull
-	@Min(1L)
+	@Min(1)
 	private int day_Interval;
 
 	public Calendar getStartDate() 

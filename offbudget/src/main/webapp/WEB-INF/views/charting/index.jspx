@@ -23,21 +23,45 @@
         <form:errors cssClass="errors" path="day_Interval"/>
       </div>
       <br/>
+      
+      
+  	<!-- div id="__id">
+		<label for="charting_form_start_date_label">Activation Date</label>
+		<div class="dijit dijitReset dijitInlineTable dijitLeft dijitTextBox dijitDateTextBox dijitTextBoxHover dijitDateTextBoxHover dijitHover" id="widget__activationDate_id" wairole="presentation" role="presentation" widgetid="_activationDate_id">
+			<div class="dijitReset dijitValidationContainer">
+				<input class="dijitReset dijitInputField dijitValidationIcon dijitValidationInner" value="? " type="text" tabindex="-1" readonly="" wairole="presentation" role="presentation"></input>
+			</div>
+			<div class="dijitReset dijitInputField dijitInputContainer">
+				<input class="dijitReset dijitInputInner" dojoattachpoint="textbox,focusNode" autocomplete="off" type="text" maxlength="524288" aria-valuenow="null" aria-invalid="false" id="_activationDate_id" tabindex="0" aria-required="false" value=""></input>
+				<input type="hidden" name="startDate" value=""></input>
+			</div>
+		</div>
+		<br></br>
+		<script type="text/javascript">
+			Spring.addDecoration(new Spring.ElementDecoration({elementId : 'startDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: 'Enter Starting Date', invalidMessage: 'Please enter valid Activation Date', required: true, constraints: {datePattern : 'MMM d, yyyy', required : true}, datePattern : 'MMM d, yyyy'}})); 
+		</script>
+	</div> -->
+      
+      
+      
+      
       <div>
         <label for="charting_form_start_date_label">
           <spring:message code="charting_form_start_date_label" />
         </label>
-        <input id="startDate" type="date" name='startDate' style="width:150px" />
+        <input id="startDate" type="text" name='startDate' style="width:150px" />
         <spring:message code="charting_form_start_date_message" var="start_date_msg" htmlEscape="false" />
         <script type="text/javascript">
           <c:set var="charting_start_date_msg">
             <spring:escapeBody javaScriptEscape="true">${start_date_msg}</spring:escapeBody>
           </c:set>
-          Spring.addDecoration(new Spring.ElementDecoration({elementId : "startDate", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${charting_start_date_msg}", required : true}})); 
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : 'startDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: 'Enter Starting Date', invalidMessage: 'Please enter valid Activation Date', required: true, constraints: {datePattern : 'MMM d, yyyy', required : true}, datePattern : 'MMM d, yyyy'}}));
+          <!-- Spring.addDecoration(new Spring.ElementDecoration({elementId : "startDate", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${charting_start_date_msg}", required : true}})); -->
         </script>
         <form:errors cssClass="errors" path="startDate"/>
       </div>
       <br/>
+      
       <div>
         <label for="charting_form_end_date_label">
           <spring:message code="charting_form_end_date_label" />
@@ -48,7 +72,8 @@
           <c:set var="charting_end_date_msg">
             <spring:escapeBody javaScriptEscape="true">${end_date_msg}</spring:escapeBody>
           </c:set>
-          Spring.addDecoration(new Spring.ElementDecoration({elementId : "endDate", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${charting_end_date_msg}", required : true}})); 
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : 'endDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: 'Enter Ending Date', invalidMessage: 'Please enter valid Activation Date', required: true, constraints: {datePattern : 'MMM d, yyyy', required : true}, datePattern : 'MMM d, yyyy'}})); 
+          <!-- Spring.addDecoration(new Spring.ElementDecoration({elementId : "endDate", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${charting_end_date_msg}", required : true}})); -->
         </script>
         <form:errors cssClass="errors" path="endDate"/>
       </div>
