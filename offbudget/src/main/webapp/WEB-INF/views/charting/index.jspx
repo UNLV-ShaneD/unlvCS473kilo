@@ -1,0 +1,67 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" version="2.0">  
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="charting_title" var="title" htmlEscape="false" />
+  <util:panel id="title" title="${title}">
+	<p>
+		<spring:message code="charting_message" />
+	</p>
+	<br />
+    <form:form method="POST" commandName="chartingForm">
+      <div>
+        <label for="charting_form_interval_label">
+          <spring:message code="charting_form_interval_label" />
+        </label>
+        <input id="day_Interval" type='text' name='day_Interval' style="width:150px" />
+        <spring:message code="charting_form_interval_message" var="interval_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="charting_interval_msg">
+            <spring:escapeBody javaScriptEscape="true">${interval_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "day_Interval", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${charting_interval_msg}", required : true}})); 
+        </script>
+        <form:errors cssClass="errors" path="day_Interval"/>
+      </div>
+      <br/>
+      <div>
+        <label for="charting_form_start_date_label">
+          <spring:message code="charting_form_start_date_label" />
+        </label>
+        <input id="startDate" type="date" name='startDate' style="width:150px" />
+        <spring:message code="charting_form_start_date_message" var="start_date_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="charting_start_date_msg">
+            <spring:escapeBody javaScriptEscape="true">${start_date_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "startDate", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${charting_start_date_msg}", required : true}})); 
+        </script>
+        <form:errors cssClass="errors" path="startDate"/>
+      </div>
+      <br/>
+      <div>
+        <label for="charting_form_end_date_label">
+          <spring:message code="charting_form_end_date_label" />
+        </label>
+        <input id="endDate" type='date' name='endDate' style="width:150px" />
+        <spring:message code="charting_form_end_date_message" var="end_date_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="charting_end_date_msg">
+            <spring:escapeBody javaScriptEscape="true">${end_date_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "endDate", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${charting_end_date_msg}", required : true}})); 
+        </script>
+        <form:errors cssClass="errors" path="endDate"/>
+      </div>
+      <br/>
+      <br/><br/>
+      <div class="submit">
+        <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId: 'proceed', event : 'onclick'}));</script>
+        <spring:message code="button_submit" var="submit_label" htmlEscape="false" />
+        <input id="proceed" type="submit" value="${fn:escapeXml(submit_label)}" />
+        <spring:message code="button_reset" var="reset_label" htmlEscape="false" />
+        <input id="reset" type="reset" value="${fn:escapeXml(reset_label)}" />
+      </div>
+      <br/>
+    </form:form>
+  </util:panel>
+</div>
