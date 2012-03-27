@@ -1,5 +1,6 @@
 package edu.unlv.kilo.domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,5 +64,19 @@ public class ItemAdjustment {
 	 */
     public boolean determineRecurrence(int iterationNumber, Date nextDate, MoneyValue nextAmount) {
         return false;
+    }
+    
+    /** Determines if this adjustment is still effective based on the date given.
+     * Returns true if the date passed is before the effective date.
+     * Returns false otherwise
+     * 
+     * @param date The date you want to compare to the effective date.
+     * @return true if date < effective date; false otherwise
+     */
+    public boolean isEffective(Calendar date){
+    	if (date.before(effectiveDate))
+    		return true;
+    	
+    	return false;
     }
 }
