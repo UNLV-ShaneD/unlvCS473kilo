@@ -2,10 +2,9 @@ package edu.unlv.kilo.domain;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import javassist.expr.Instanceof;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
@@ -26,7 +25,7 @@ public class ItemEntity implements Comparable {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<ItemAdjustment> adjustments = new HashSet<ItemAdjustment>();
-
+    
     private String description;
     private boolean inflation;
     
@@ -138,4 +137,37 @@ public class ItemEntity implements Comparable {
 		}
 		return -1;
 	}
+    
+    /** Calculates and returns the base value of the item
+     * 
+     * @return The predicted value of the next transaction based on the average of recurring transactions in the item.
+     */
+    public MoneyValue getBaseValue(){
+    	MoneyValue baseValue = new MoneyValue();
+    	long recurrence_num = 0;
+    	Iterator<TransactionEntity> trans_it = transactions.iterator();
+    	
+    	while (trans_it.hasNext()){
+    		if (trans_it.next().isRecurring()){
+    			addMoneyValues(baseValue, trans_it.next().getAmount());
+    			recurrence_num++;
+    		}
+    	}
+    	
+    	baseValue.setAmount(baseValue.getAmount() / recurrence_num);
+    	
+    	return baseValue;
+    }
+    
+    /** Adds together two MoneyValue objects. The parameter 'base' will have its value added to by the parameter 'add'.
+     * This means 'base' will have the sum of the two values set to its amount.
+     * 
+     * NOTE: This should be refactored into the MoneyValue class - it has no business in the ItemEntity class
+     * 
+     * @param base The MoneyValue object to be added to.
+     * @param add The MoneyValue object to add with.
+     */
+    public void addMoneyValues(MoneyValue base, MoneyValue add){
+    	base.setAmount(base.getAmount() + add.getAmount());
+    }
 }
