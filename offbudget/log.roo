@@ -73,7 +73,6 @@ hint finders
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-23 23:54:08
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 10:10:05
 field boolean --class ~.domain.ItemEntity --fieldName inflation
-<<<<<<< HEAD
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 12:16:49
 hint
 hint entities
@@ -93,7 +92,6 @@ exit
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-25 10:17:45
 entity jpa --class ~.domain.Branch
 field set --fieldName subbranches --type ~.domain.Branch 
-<<<<<<< HEAD
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-26 07:22:11
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 16:06:43
 controller class --class ~.web.AdjustingController
@@ -102,11 +100,14 @@ controller class --class ~.web.AdjustingController
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 22:00:45
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 23:15:43
 security setup
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 09:36:17// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 13:40:00
+perform clean
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 23:16:08
+=======
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 09:36:17
 =======
->>>>>>> upstream/master
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 01:30:35
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 21:39:09
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 19:46:27
->>>>>>> strongd/master
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 22:49:23
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-28 07:59:18
