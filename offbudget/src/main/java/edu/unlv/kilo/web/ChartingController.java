@@ -55,6 +55,7 @@ import com.googlecode.charts4j.Plots;
 import com.googlecode.charts4j.Shape;
 
 import edu.unlv.kilo.domain.MoneyValue;
+import edu.unlv.kilo.provider.Projection;
 import static com.googlecode.charts4j.Color.*;
 
 @RequestMapping("/charting/**")
@@ -92,7 +93,7 @@ public class ChartingController
     	int interval = form.getDay_Interval();		// Gets the interval in days from the user
     	
     	// Send the data to projecting and receive the points to plot
-    	// List<MoneyValue> data_Points = Projection.getGraphData(startDate, endDate, interval);
+    	//List<MoneyValue> data_Points = Projection.getGraphData(startDate, endDate, interval);
     	
     	
     	/*------------TEST CASE------------------------------------------*/
