@@ -73,10 +73,27 @@ hint finders
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-23 23:54:08
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 10:10:05
 field boolean --class ~.domain.ItemEntity --fieldName inflation
+<<<<<<< HEAD
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 12:16:49
+hint
+hint entities
+entity jpa --class ~.domain.Projection --testAutomatically 
+hint
+hint fields
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 22:29:35
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-24 22:38:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 22:38:22
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-24 23:39:10
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 23:39:20
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-24 23:52:30
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-24 23:53:14
+=======
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-24 23:50:25
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-25 10:17:45
 entity jpa --class ~.domain.Branch
 field set --fieldName subbranches --type ~.domain.Branch 
+<<<<<<< HEAD
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-26 07:22:11
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 16:06:43
 controller class --class ~.web.AdjustingController
@@ -86,3 +103,10 @@ controller class --class ~.web.AdjustingController
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 23:15:43
 security setup
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 09:36:17
+=======
+>>>>>>> upstream/master
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 01:30:35
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 21:39:09
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 19:46:27
+>>>>>>> strongd/master
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 22:49:23
