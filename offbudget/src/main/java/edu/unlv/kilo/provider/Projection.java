@@ -3,9 +3,7 @@ package edu.unlv.kilo.provider;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -19,7 +17,8 @@ import edu.unlv.kilo.domain.TransactionEntity;
 
 /**
  * @author Dane
- * The purpose of the Projection class is to calculate the user's budget based on the items submitted.
+ * The purpose of the Projection class is to calculate the future transactions of the item
+ * selected by the user over a specified time period.
  */
 @RooJavaBean
 @RooToString
@@ -42,6 +41,8 @@ public class Projection {
      * @return The requested data for plotting the graphs in a List.
      */
     public static List<MoneyValue> getGraphData(Calendar startDate, Calendar endDate, int interval){
+    	// make sure the list to return is empty before adding the new values to it
+    	balance_data.clear();
     	// MoneyValue current = new MoneyValue();
     	Calendar oldDate = Calendar.getInstance();
     	int oldInterval = 0;
@@ -49,7 +50,7 @@ public class Projection {
     	MoneyValue oldValue = new MoneyValue();
     	
     	/*		PLACEHOLDER		*/
-    	// receive item
+    	// receive item from item management (what's the method?)
     	ItemEntity item = new ItemEntity();
     	/*						*/
     	
@@ -73,11 +74,12 @@ public class Projection {
     	// get the base value of the item
     	oldValue = item.getBaseValue();
     	
-    	// initialize new variables for iterating through the Adjustments
+    	// initialize 'new' variables for iterating through the Adjustments
     	Calendar nextDate = oldDate;
     	MoneyValue nextValue = oldValue;
     	int newInterval = oldInterval;
-    	
+    	// Iterate through the adjustments for the projected transactions, and stop 
+    	// when the date is no longer in the range specified by startDate and endDate
     	while (nextDate.compareTo(endDate) <= 0){
     		iterationNumber++;
     		
@@ -86,6 +88,7 @@ public class Projection {
     			if (!adjust.isEffective(oldDate))
     				continue;
     			
+    			// calculate the new interval
     			newInterval = adjust.projectTransactionInterval(oldInterval);
     			
     			// calculate the new date
@@ -106,28 +109,12 @@ public class Projection {
     			oldValue = nextValue;
     		}
     		
+    		// add the MoneyValue to the list that is sent back to Charting
     		balance_data.add(nextValue);
     	}
 
     	return balance_data;
-    }
-    
-    /** Calculates the number of days between two dates.
-     * 
-     * @param startDate The beginning date.
-     * @param endDate The end date.
-     * @return The number of days in between the startDate and endDate.
-     */
-    public static int daysBetween(Calendar startDate, Calendar endDate) {  
-    	  Calendar date = (Calendar) startDate.clone();  
-    	  int daysBetween = 0;  
-    	  while (date.before(endDate)) {  
-    	    date.add(Calendar.DAY_OF_MONTH, 1);  
-    	    daysBetween++;  
-    	  }  
-    	  
-    	  return daysBetween;  
-    }  
+    } 
     
     /** Converts a Date type object to a Calendar type object.
      * 
